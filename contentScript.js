@@ -5,6 +5,8 @@ document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
         image.style = 'border: 10px solid red;'
     } else {
         const closestParagraph = image.closest('p');
+        if (!closestParagraph) return; // TODO: handle when image is nested in elements like a table cell.
+
         closestParagraph.style = "position: relative; padding: 0; margin: 0;";
 
         const subtitle = document.createElement('span');
