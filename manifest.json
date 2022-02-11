@@ -1,0 +1,16 @@
+{
+  "manifest_version": 2,
+
+  "name": "github-a11y",
+  "description": "This extension helps increase accessibility mindfulness while using GitHub",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": ["https://*.github.com/*"],
+      "js": ["contentScript.js"]
+    }
+  ],
+  "permissions": [
+      "activeTab"
+      ]
+  }
