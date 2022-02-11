@@ -22,9 +22,10 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 <img width="851" alt="Example screenshots of images that have been posted on a GitHub issue. The extension has added a white text containing alt text against dark image overlay." src="https://user-images.githubusercontent.com/16447748/153546975-920b181b-e7c6-42ae-98bd-bf31ddf81604.png">
 
-- Appends the heading level that is used in front of the headings within markdown bodies. Heading levels are useful for conveying semantics for screen reader, and other assistive technology users. This similarly aims to bring mindfulness particularly for sighted users who may pay less attention to heading level semantics.
+- Appends the heading level that is used after the heading text within markdown bodies. Heading levels are useful for conveying semantics for screen reader, and other assistive technology users. This similarly aims to bring mindfulness particularly for sighted users who may pay less attention to heading level semantics.
 
-<img width="683" alt="Example screenshots of purple heading levels appended in front of headings inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153546987-abd8d537-a980-437b-bfc5-243291f1cecc.png">
+<img width="916" alt="Example screenshots of purple heading levels appended in at end of heading text line inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153683612-1b7d5975-ed45-4985-892d-6fd64545d18d.png">
+
 
 **Note**: This is  currently not customizable and the styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. You can do this by modifying `contentScript.js` to your preferred styling. Then press `Update` on `chrome://extensions/` so changes are reflected in extension.
 
