@@ -26,7 +26,7 @@ document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
 
     headingPrefix.setAttribute('aria-hidden', 'true');
     headingPrefix.style = "color: purple; right: 0; position: absolute;";
-    headingPrefix.textContent = ` ${heading.tagName}`;
+    headingPrefix.textContent = ` ${heading.tagName.toLowerCase()}`;
 
     heading.append(headingPrefix);
   });
