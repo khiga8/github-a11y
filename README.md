@@ -20,11 +20,11 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 - Creates a text overlay over all images with the alt text. This includes Pull Requests, Issues, Repo READMEs, and Discussions. If an image is missing an alt text, it will appear with a red border. Images are frequently shared within GitHub and this aims to bring mindfulness. This image overlay aims to bring awareness particularly for sighted users who may not rely on alt text.
 
-<img width="851" alt="Example screenshots of images that have been posted on a GitHuub with an alt text overlay." src="https://user-images.githubusercontent.com/16447748/153546975-920b181b-e7c6-42ae-98bd-bf31ddf81604.png">
+<img width="851" alt="Example screenshots of images that have been posted on a GitHub issues, with a white text against dark overlay." src="https://user-images.githubusercontent.com/16447748/153546975-920b181b-e7c6-42ae-98bd-bf31ddf81604.png">
 
 - Appends the heading level that is used in front of the headings within markdown bodies. Heading levels are useful for conveying semantics for screen reader, and other assistive technology users. This similarly aims to bring mindfulness.
 
-<img width="683" alt="Example screenshots of heading levels that have been appended in front of headings inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153546987-abd8d537-a980-437b-bfc5-243291f1cecc.png">
+<img width="683" alt="Example screenshots of purple heading levels that have been appended in front of headings inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153546987-abd8d537-a980-437b-bfc5-243291f1cecc.png">
 
 
 
