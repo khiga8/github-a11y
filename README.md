@@ -27,3 +27,14 @@ This extension will only run on GitHub domain and does the folowing on all markd
 <img width="683" alt="Example screenshots of purple heading levels appended in front of headings inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153546987-abd8d537-a980-437b-bfc5-243291f1cecc.png">
 
 **Note**: This is  currently not customizable and the styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. You can do this by modifying `contentScript.js` to your preferred styling. Then press `Update` on `chrome://extensions/` so changes are reflected in extension.
+
+## Resources
+
+### Image alt text
+
+- [WebAIM: Alternative Text](https://webaim.org/techniques/alttext/)
+
+### Heading levels
+
+- [WAI: Headings](https://www.w3.org/WAI/tutorials/page-structure/headings/)
+- [Medium: Headings for Visually Inclined](https://medium.com/@inkblotty/headings-for-the-visually-inclined-c537e87865f)
