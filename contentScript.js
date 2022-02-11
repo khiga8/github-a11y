@@ -21,12 +21,13 @@ document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
 
   // Appends heading level to headings. This is hidden from accesibility tree.
   commentBody.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(function(heading) {
+    heading.style = 'position: relative;';
     const headingPrefix = document.createElement('span');
 
     headingPrefix.setAttribute('aria-hidden', 'true');
-    headingPrefix.textContent = `${heading.tagName} `;
-    headingPrefix.style = "color: purple;";
+    headingPrefix.style = "color: purple; right: 0; position: absolute;";
+    headingPrefix.textContent = ` ${heading.tagName}`;
 
-    heading.insertBefore(headingPrefix, heading.firstChild);
+    heading.append(headingPrefix);
   });
 });
