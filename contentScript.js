@@ -1,4 +1,5 @@
 document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
+  // Adds alt image overlay. This is hidden from accesibility tree.
   commentBody.querySelectorAll('img').forEach(function(image) {
     const altText = image.getAttribute('alt');
     if (!altText) {
@@ -18,15 +19,14 @@ document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
     }
   });
 
+  // Appends heading level to headings. This is hidden from accesibility tree.
   commentBody.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(function(heading) {
-    const headingLevel = heading.tagName;
     const headingPrefix = document.createElement('span');
 
     headingPrefix.setAttribute('aria-hidden', 'true');
-    headingPrefix.textContent = `${headingLevel} `;
-    headingPrefix.style = "color: purple; font-weight: 700;";
+    headingPrefix.textContent = `${heading.tagName} `;
+    headingPrefix.style = "color: purple;";
 
     heading.insertBefore(headingPrefix, heading.firstChild);
   });
 });
-  

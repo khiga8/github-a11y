@@ -13,7 +13,6 @@ This assumes you are using a Google Chrome browser.
 3. Select `Load unpacked`.
 4. Choose this unzipped repo folder.
 5. Navigate to github.com.
-6. **Optional**: Adjust `contentScript.js` to your preferred styling. Then press `Update` on `chrome://extensions/`.
 
 ## Features
 
@@ -27,4 +26,4 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 <img width="683" alt="Example screenshots of purple heading levels appended in front of headings inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153546987-abd8d537-a980-437b-bfc5-243291f1cecc.png">
 
-**Note**: This is currently not customizable and the styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files.
+**Note**: This is  currently not customizable and the styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. You can do this by modifying `contentScript.js` to your preferred styling. Then press `Update` on `chrome://extensions/` so changes are reflected in extension.
