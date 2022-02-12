@@ -39,3 +39,7 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 - [WAI: Headings](https://www.w3.org/WAI/tutorials/page-structure/headings/)
 - [Medium: Headings for Visually Inclined](https://medium.com/@inkblotty/headings-for-the-visually-inclined-c537e87865f)
+
+## Bug?
+
+If you encounter a bug, please file a ticket. Pull requests welcome.
