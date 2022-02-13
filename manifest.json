@@ -8,7 +8,9 @@
     {
       "matches": ["https://*.github.com/*"],
       "run_at": "document_idle",
+      "css": ["styles.css"],
       "js": ["contentScript.js"]
+
     }
   ],
   "background": {
