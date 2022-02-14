@@ -26,8 +26,9 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 <img width="916" alt="Example screenshots of purple heading levels appended in at end of heading text line inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153683612-1b7d5975-ed45-4985-892d-6fd64545d18d.png">
 
+### Customization note
 
-**Note**: This is currently not customizable and the styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. You can do this by modifying `styles.css` to your preferred styling. Then press `Update` on `chrome://extensions/` so changes are reflected in extension.
+This is currently not customizable and the styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. You can do this by modifying `styles.css` to your preferred styling. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Then press `Update` on `chrome://extensions/` so changes are reflected in extension.
 
 ## Resources
 

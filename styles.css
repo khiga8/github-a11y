@@ -1,16 +1,16 @@
-/* Necessary for image overlay positioning */
+/* For image overlay positioning */
 .github-a11y-img-container {
   position: relative; 
   padding: 0; 
   margin: 0;
 }
 
-/* For when image is missing alt text */
+/* Styling for when image is missing alt text */
 .github-a11y-img-missing-alt {
   border: 10px solid red;
 }
 
-/* For image overlay */
+/* Styling for image overlay */
 .github-a11y-img-caption {
   display: block; 
   background-color: #121212; 
@@ -26,15 +26,17 @@
   opacity: 0.6;
 }
 
-/* Necessary for heading positioning */
-.github-a11y-heading {
+/* Styling for heading level text. */
+.github-a11y-heading-prefix {
+  color: purple; 
+}
+
+/* Used to position heading at end of line. See `contentScript.js` if you'd like heading at front */
+.github-a11y-heading-after {
   display: table; 
   width: 100%;
 }
-
-/* For appended heading text */
-.github-a11y-heading-prefix {
-  color: purple; 
+.github-a11y-heading-prefix-after {
   display: table-cell; 
   text-align: right;
 }
