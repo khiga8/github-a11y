@@ -3,12 +3,14 @@
 
   "name": "github-a11y",
   "description": "This extension helps increase accessibility mindfulness while using GitHub",
-  "version": "0.2",
+  "version": "0.3",
   "content_scripts": [
     {
       "matches": ["https://*.github.com/*"],
       "run_at": "document_idle",
+      "css": ["styles.css"],
       "js": ["contentScript.js"]
+
     }
   ],
   "background": {
