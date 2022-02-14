@@ -7,7 +7,6 @@
   "content_scripts": [
     {
       "matches": ["https://*.github.com/*"],
-      "run_at": "document_idle",
       "css": ["styles.css"],
       "js": ["contentScript.js"]
 
@@ -16,5 +15,5 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "permissions": ["*://github.com/*", "tabs", "webNavigation"]
+  "permissions": ["*://*.github.com/*", "tabs", "webNavigation"]
 }

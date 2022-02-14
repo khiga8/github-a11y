@@ -1,3 +1,6 @@
 chrome.webNavigation.onHistoryStateUpdated.addListener(function(details) {
-  chrome.tabs.executeScript(details.tabId,{file:"contentScript.js"});
-}, {url: [{hostEquals: 'github.com'}]});
+  console.log("onHistoryStateUpdated", details);
+  chrome.tabs.sendMessage(details.tabId, {
+    type: 'navigation'
+  });
+}, {url: [{hostSuffix: 'github.com'}]});
