@@ -1,13 +1,16 @@
+/* Necessary for image overlay positioning */
 .github-a11y-img-container {
   position: relative; 
   padding: 0; 
   margin: 0;
 }
 
+/* For when image is missing alt text */
 .github-a11y-img-missing-alt {
   border: 10px solid red;
 }
 
+/* For image overlay */
 .github-a11y-img-caption {
   display: block; 
   background-color: #121212; 
@@ -23,11 +26,13 @@
   opacity: 0.6;
 }
 
+/* Necessary for heading positioning */
 .github-a11y-heading {
   display: table; 
   width: 100%;
 }
 
+/* For appended heading text */
 .github-a11y-heading-prefix {
   color: purple; 
   display: table-cell; 
