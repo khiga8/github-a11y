@@ -16,6 +16,11 @@ function addHeadingToFront(heading, headingPrefix) {
 }
 
 function appendAccessibilityInfo() {
+  const elements = document.querySelectorAll('.github-a11y-heading-prefix, .github-a11y-img-caption')
+  for (const element of elements) {
+    element.remove();
+  }
+
   document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
     // Adds alt image overlay. This is hidden from accesibility tree.
     commentBody.querySelectorAll('img').forEach(function(image) {
@@ -45,16 +50,10 @@ function appendAccessibilityInfo() {
       addHeadingToBack(heading, headingPrefix); // Swappable with `addHeadingToFront`
     });
   });
- }
-
-function cleanup() {
-  document.querySelectorAll(".github-a11y-img-caption").forEach(el => el.remove());
-  document.querySelectorAll(".github-a11y-heading-prefix").forEach(el => el.remove());
 }
 
 /* Listen for messages from the background script */
-chrome.runtime.onMessage.addListener(async () => {
-  cleanup();
+chrome.runtime.onMessage.addListener(() => {
   appendAccessibilityInfo();
 });
 
