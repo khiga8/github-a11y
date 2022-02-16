@@ -58,3 +58,16 @@ chrome.runtime.onMessage.addListener(() => {
 });
 
 appendAccessibilityInfo();
+
+const observer = new MutationObserver(function(mutationList) {
+  for (const mutation of mutationList) {
+    if (mutation.target.matches('.markdown-body')) {
+      appendAccessibilityInfo();
+    }
+  }
+})
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
