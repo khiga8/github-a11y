@@ -24,19 +24,26 @@ function appendAccessibilityInfo() {
   document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
     // Adds alt image overlay. This is hidden from accesibility tree.
     commentBody.querySelectorAll('img').forEach(function(image) {
-      const altText = image.getAttribute('alt');
-      if (!altText) {
+      let altText = image.getAttribute('alt');
+      if (!image.hasAttribute('alt')) {
           image.classList.add('github-a11y-img-missing-alt')
       } else {
           const parentElement = image.parentElement;
           if (!parentElement) return;
-  
-          parentElement.classList.add('github-a11y-img-container');
-  
+
           const subtitle = document.createElement('span');
+          subtitle.classList.add('github-a11y-img-caption');
+
+          if (altText === "") {
+            altText = "hidden"
+            subtitle.classList.add('github-a11y-img-caption-empty-alt')
+          } else {
+            subtitle.classList.add('github-a11y-img-caption-with-alt');
+          }
+          parentElement.classList.add('github-a11y-img-container');
+
           subtitle.setAttribute('aria-hidden', 'true');
           subtitle.textContent = altText;
-          subtitle.classList.add('github-a11y-img-caption');
           
           image.insertAdjacentElement('afterend', subtitle);
       }
