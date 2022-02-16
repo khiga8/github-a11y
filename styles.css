@@ -2,11 +2,12 @@
 .github-a11y-img-container {
   display: inline-block;
   vertical-align: top;
+  border: 2px solid grey;
 }
 
 /* Styling for when image is missing alt text */
 .github-a11y-img-missing-alt {
-  border: 10px solid red;
+  border: 5px solid red;
 }
 
 /* Styling for image overlay */
@@ -19,9 +20,9 @@
   left: 0;  */
   font-weight: 700; 
   z-index: 2; 
-  max-width: fit-content; 
-  font-size: 0.85rem; 
-  opacity: 0.6;
+  width: 100%;
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
 /* Styling for heading level text. */
