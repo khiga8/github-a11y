@@ -1,21 +1,36 @@
+:root {
+  /* Feel free to customize colors to your preference */
+  --github-a11y-h1-color: purple;
+  --github-a11y-h2-color: purple;
+  --github-a11y-h3-color: purple;
+  --github-a11y-h4-color: purple;
+  --github-a11y-h5-color: purple;
+  --github-a11y-h6-color: purple;
+  --github-a11y-heading-border: none; /* set to solid if you prefer heading border for more visibility */
+  --github-a11y-img-invalid-border-color: red;
+  --github-a11y-img-valid-border-color: grey;
+  --github-a11y-img-overlay-background-color: black;
+  --github-a11y-img-overlay-text-color: white;
+}
+
 /* For image overlay positioning */
 .github-a11y-img-container {
   display: inline-block;
   vertical-align: top;
-  border: 2px solid grey;
+  border: 2px solid var(--github-a11y-img-valid-border-color); 
 }
 
 /* Styling for when image is missing alt text */
 .github-a11y-img-missing-alt {
-  border: 5px solid red;
+  border: 5px solid var(--github-a11y-img-invalid-border-color); 
 }
 
 /* Styling for image overlay */
 .github-a11y-img-caption {
   display: block; 
-  background-color: #121212; 
+  background-color: var(--github-a11y-img-overlay-background-color); 
   padding: 0.5em; 
-  color: white; 
+  color: var(--github-a11y-img-overlay-text-color);
   z-index: 2; 
   width: 100%;
   opacity: 0.8;
@@ -32,10 +47,59 @@
   font-size: 0.6rem;
 }
 
-/* Styling for heading level text. */
-.github-a11y-heading-prefix {
-  color: purple; 
+.markdown-body h1.github-a11y-heading {
+  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h1-color); 
 }
+
+.markdown-body h1 > .github-a11y-heading-prefix, 
+.markdown-body h1.github-a11y-heading-prefix {
+  color: var(--github-a11y-h1-color); 
+}
+
+.markdown-body h2.github-a11y-heading {
+  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h2-color); 
+}
+
+.markdown-body h2 > .github-a11y-heading-prefix, 
+.markdown-body h2.github-a11y-heading-prefix {
+  color: var(--github-a11y-h2-color); 
+}
+
+.markdown-body h3.github-a11y-heading {
+  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h3-color); 
+}
+
+.markdown-body h3 > .github-a11y-heading-prefix, 
+.markdown-body h3.github-a11y-heading-prefix {
+  color: var(--github-a11y-h3-color); 
+}
+
+.markdown-body h4.github-a11y-heading {
+  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h4-color);
+}
+
+.markdown-body h4 > .github-a11y-heading-prefix, 
+.markdown-body h4.github-a11y-heading-prefix {
+  color: var(--github-a11y-h4-color); 
+}
+
+.markdown-body h5.github-a11y-heading {
+  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h5-color);
+}
+
+.markdown-body h5 > .github-a11y-heading-prefix, 
+.markdown-body h5.github-a11y-heading-prefix {
+  color: var(--github-a11y-h5-color); 
+}
+
+.markdown-body h6.github-a11y-heading {
+  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h6-color);
+}
+
+.markdown-body h6 > .github-a11y-heading-prefix, 
+.markdown-body h6.github-a11y-heading-prefix {
+  color: var(--github-a11y-h6-color); 
+} 
 
 /* Used to position heading at end of line. See `contentScript.js` if you'd like heading at front */
 .github-a11y-heading-after {
