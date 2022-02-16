@@ -28,7 +28,9 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 ### Customization note
 
-This is currently not customizable and the styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. You can do this by modifying `styles.css` to your preferred styling. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Then press `Update` on `chrome://extensions/` so changes are reflected in extension.
+The styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. 
+
+You can do this by modifying `styles.css`. There are CSS variables at the top which you may set to your preferred colors. For example, you may choose to set a different color for each heading level, or add a border for distinguishability. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Once changes are made, `Update` on `chrome://extensions/` so changes are reflected in extension.
 
 ## Resources
 

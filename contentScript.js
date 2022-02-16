@@ -12,6 +12,7 @@ function addHeadingToBack(heading, headingPrefix) {
 function addHeadingToFront(heading, headingPrefix) {
   headingPrefix.textContent = `${heading.tagName.toLowerCase()} `;
   headingPrefix.classList.add('github-a11y-heading-prefix');
+  heading.classList.add('github-a11y-heading');
   heading.insertBefore(headingPrefix, heading.firstChild);
 }
 
