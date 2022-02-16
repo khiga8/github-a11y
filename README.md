@@ -32,6 +32,9 @@ The styling I've set may not be suitable for all users. Feel free to customize t
 
 You can do this by modifying `styles.css`. There are CSS variables at the top which you may set to your preferred colors. For example, you may choose to set a different color for each heading level, or add a border for distinguishability. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Once changes are made, `Update` on `chrome://extensions/` so changes are reflected in extension.
 
+#### Example customization
+<img width="907" alt="Screen shot of example customization with each heading level assigned to a different color, and an underline with the color" src="https://user-images.githubusercontent.com/16447748/154328368-0336790d-4e54-4ed5-b7b0-4a10af32dbe1.png">
+
 ## Resources
 
 ### Image alt text
