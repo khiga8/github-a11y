@@ -16,13 +16,20 @@
   background-color: #121212; 
   padding: 0.5em; 
   color: white; 
-  /* bottom: 0.5em; 
-  left: 0;  */
-  font-weight: 700; 
   z-index: 2; 
   width: 100%;
-  font-size: 0.8rem;
   opacity: 0.8;
+}
+
+/* Styling on caption for when image has alt */
+.github-a11y-img-caption-with-alt {
+  font-size: 0.8rem;
+}
+
+/* Styling on caption for when image is hidden */
+.github-a11y-img-caption-empty-alt {
+  font-style: italic;
+  font-size: 0.6rem;
 }
 
 /* Styling for heading level text. */

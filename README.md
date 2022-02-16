@@ -18,7 +18,7 @@ This assumes you are using a Google Chrome browser.
 
 This extension will only run on GitHub domain and does the folowing on all markdown bodies on GitHub:
 
-- Creates a text overlay over all images with the alt text. This includes Pull Requests, Issues, Repo READMEs, and Discussions. If an image is missing an alt text, it will appear with a red border. Images are frequently shared within GitHub. This image overlay aims to bring awareness about alt text particularly for sighted users who may not rely on alt text.
+- Creates a text overlay over all images with the alt text. This includes Pull Requests, Issues, Repo READMEs, and Discussions. If an image is missing an alt text, it will appear with a red border. If an image has an empty alt text, the text will show with italicized caption, "hidden". Images are frequently shared within GitHub. This image overlay aims to bring awareness about alt text particularly for sighted users who may not rely on alt text.
 
 <img width="851" alt="Example screenshots of images that have been posted on a GitHub issue. The extension has added a white text containing alt text against dark image overlay." src="https://user-images.githubusercontent.com/16447748/153546975-920b181b-e7c6-42ae-98bd-bf31ddf81604.png">
 
