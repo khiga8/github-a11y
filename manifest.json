@@ -6,7 +6,7 @@
   "version": "0.3",
   "content_scripts": [
     {
-      "matches": ["https://*.github.com/*"],
+      "matches": ["https://github.com/*", "https://gist.github.com/*"],
       "css": ["styles.css"],
       "js": ["contentScript.js"]
 
@@ -15,5 +15,5 @@
   "background": {
     "scripts": ["background.js"]
   },
-  "permissions": ["*://*.github.com/*", "tabs", "webNavigation"]
+  "permissions": ["*://github.com/*", "https://gist.github.com/*", "tabs", "webNavigation"]
 }

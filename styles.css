@@ -1,13 +1,13 @@
 /* For image overlay positioning */
 .github-a11y-img-container {
-  position: relative; 
-  padding: 0; 
-  margin: 0;
+  display: inline-block;
+  vertical-align: top;
+  border: 2px solid grey;
 }
 
 /* Styling for when image is missing alt text */
 .github-a11y-img-missing-alt {
-  border: 10px solid red;
+  border: 5px solid red;
 }
 
 /* Styling for image overlay */
@@ -16,14 +16,13 @@
   background-color: #121212; 
   padding: 0.5em; 
   color: white; 
-  position: absolute; 
-  bottom: 0.5em; 
-  left: 0; 
+  /* bottom: 0.5em; 
+  left: 0;  */
   font-weight: 700; 
   z-index: 2; 
-  width: 100%; 
-  font-size: 1.0rem; 
-  opacity: 0.6;
+  width: 100%;
+  font-size: 0.8rem;
+  opacity: 0.8;
 }
 
 /* Styling for heading level text. */
@@ -36,6 +35,7 @@
   display: table; 
   width: 100%;
 }
+
 .github-a11y-heading-prefix-after {
   display: table-cell; 
   text-align: right;
