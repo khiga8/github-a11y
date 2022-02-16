@@ -1,8 +1,7 @@
 /* For image overlay positioning */
 .github-a11y-img-container {
-  position: relative; 
-  padding: 0; 
-  margin: 0;
+  display: inline-block;
+  vertical-align: top;
 }
 
 /* Styling for when image is missing alt text */
@@ -16,13 +15,12 @@
   background-color: #121212; 
   padding: 0.5em; 
   color: white; 
-  position: absolute; 
-  bottom: 0.5em; 
-  left: 0; 
+  /* bottom: 0.5em; 
+  left: 0;  */
   font-weight: 700; 
   z-index: 2; 
-  width: 100%; 
-  font-size: 1.0rem; 
+  max-width: fit-content; 
+  font-size: 0.85rem; 
   opacity: 0.6;
 }
 
@@ -36,6 +34,7 @@
   display: table; 
   width: 100%;
 }
+
 .github-a11y-heading-prefix-after {
   display: table-cell; 
   text-align: right;

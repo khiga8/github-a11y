@@ -23,10 +23,10 @@ function appendAccessibilityInfo() {
       if (!altText) {
           image.classList.add('github-a11y-img-missing-alt')
       } else {
-          const closestParagraph = image.closest('p');
-          if (!closestParagraph) return;
+          const parentElement = image.parentElement;
+          if (!parentElement) return;
   
-          closestParagraph.classList.add('github-a11y-img-container');
+          parentElement.classList.add('github-a11y-img-container');
   
           const subtitle = document.createElement('span');
           subtitle.setAttribute('aria-hidden', 'true');
