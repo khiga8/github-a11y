@@ -13,7 +13,7 @@ This assumes you are using a Google Chrome browser.
 3. Select `Load unpacked`.
 4. Choose this unzipped repo folder.
 5. Navigate to github.com.
-6. **Optional**: Set custom styles. Learn more in [Customization note](#customization-note).
+6. **Optional but highly recommended**: Set custom styles. Learn more in [Customization note](#customization-note).
 
 ## Features
 
@@ -31,7 +31,7 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 The styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. 
 
-You can do this by modifying `styles.css`. There are CSS variables at the top which you may set to your preferred colors. For example, you may choose to set a different color for each heading level, or add a border for distinguishability. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Once changes are made, `Update` on `chrome://extensions/` so changes are reflected in extension.
+You can do this by modifying `styles.css`. There are CSS variables at the top which you may set to your preference. For example, you may choose to set a different color for each heading level, or add a border for distinguishability. These customizations can be very helpful for visual processing. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Once changes are made, `Update` on `chrome://extensions/` so changes are reflected in extension.
 
 #### Example customization
 <img width="907" alt="Screen shot of example customization with each heading level assigned to a different color, and an underline with the color" src="https://user-images.githubusercontent.com/16447748/154328368-0336790d-4e54-4ed5-b7b0-4a10af32dbe1.png">
