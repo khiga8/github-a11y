@@ -69,7 +69,7 @@ appendAccessibilityInfo();
 
 const observer = new MutationObserver(function(mutationList) {
   for (const mutation of mutationList) {
-    if (mutation.target.matches('.markdown-body')) {
+    if (mutation.target.matches('.markdown-body') || mutation.target.matches('.js-commit-preview')) {
       appendAccessibilityInfo();
     }
   }
