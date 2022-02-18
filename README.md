@@ -25,7 +25,8 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 - Appends the heading level that is used after the heading text within markdown bodies. Heading levels are useful for conveying semantics for screen reader, and other assistive technology users. This similarly aims to bring mindfulness particularly for sighted users who may pay less attention to heading level semantics.
 
-<img width="600" alt="Example screenshots of purple heading levels appended in at end of heading text line inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/153683612-1b7d5975-ed45-4985-892d-6fd64545d18d.png">
+<img width="600" alt="Example screenshots of purple heading levels appended in at end of heading text line inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/154616579-0db0bba3-4edb-4523-a89d-0c91888acbe0.png">
+
 
 ### Customization note
 
