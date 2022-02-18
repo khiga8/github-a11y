@@ -6,7 +6,7 @@
   --github-a11y-h4-color: purple;
   --github-a11y-h5-color: purple;
   --github-a11y-h6-color: purple;
-  --github-a11y-heading-border: none; /* set to solid if you prefer heading border for more visibility */
+  --github-a11y-heading-border: solid; /* set to none if you prefer no heading border */
   --github-a11y-img-invalid-border-color: red;
   --github-a11y-img-valid-border-color: grey;
   --github-a11y-img-overlay-background-color: black;
