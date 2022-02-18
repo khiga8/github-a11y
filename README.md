@@ -13,7 +13,7 @@ This assumes you are using a Google Chrome browser.
 3. Select `Load unpacked`.
 4. Choose this unzipped repo folder.
 5. Navigate to github.com.
-6. **Optional but highly recommended**: Set custom styles. Learn more in [Customization note](#customization-note).
+6. **Optional but recommended**: Set custom styles to your preference. Learn more in [Customization note](#customization-note).
 
 ## Features
 
@@ -25,17 +25,14 @@ This extension will only run on GitHub domain and does the folowing on all markd
 
 - Appends the heading level that is used after the heading text within markdown bodies. Heading levels are useful for conveying semantics for screen reader, and other assistive technology users. This similarly aims to bring mindfulness particularly for sighted users who may pay less attention to heading level semantics.
 
-<img width="600" alt="Example screenshots of purple heading levels appended in at end of heading text line inside a GitHub markdown" src="https://user-images.githubusercontent.com/16447748/154616579-0db0bba3-4edb-4523-a89d-0c91888acbe0.png">
+<img width="600" alt="Example screenshots of heading levels appended at end of heading text line inside a GitHub markdown, each represented by a different color" src="https://user-images.githubusercontent.com/16447748/154763325-57ad4785-691c-4760-b0ca-b2e3cabacd1f.png">
 
 
 ### Customization note
 
-The styling I've set may not be suitable for all users. Feel free to customize this however you like when you download these files. 
+The styling I've set may not be suitable for all users. Feel free to customize these however you like when you download these files. 
 
-You can do this by modifying `styles.css`. There are CSS variables at the top which you may set to your preference. For example, you may choose to set a different color for each heading level, or set a border for distinguishability. These customizations can be very helpful for visual processing. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Once changes are made, `Update` on `chrome://extensions/` so changes are reflected in extension.
-
-#### Example customization
-<img width="907" alt="Screen shot of example customization with each heading level assigned to a different color, and an underline with the color" src="https://user-images.githubusercontent.com/16447748/154328368-0336790d-4e54-4ed5-b7b0-4a10af32dbe1.png">
+You can do this by modifying `styles.css`. There are CSS variables at the top which you may set to your preference. For example, you may choose to set a different color for each heading level or remove the border. If you'd prefer the headings to be positioned at front, follow the notes in `contentScript.js`. Once changes are made, `Update` on `chrome://extensions/` so changes are reflected in extension.
 
 ## Resources
 

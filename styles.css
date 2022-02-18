@@ -1,11 +1,11 @@
 :root {
   /* Feel free to customize colors to your preference */
-  --github-a11y-h1-color: purple;
-  --github-a11y-h2-color: purple;
-  --github-a11y-h3-color: purple;
-  --github-a11y-h4-color: purple;
-  --github-a11y-h5-color: purple;
-  --github-a11y-h6-color: purple;
+  --github-a11y-h1-color: #9B59B6;
+  --github-a11y-h2-color: #2A7AB0;
+  --github-a11y-h3-color: #9F6B3F;
+  --github-a11y-h4-color: #5A781D;
+  --github-a11y-h5-color: #d4521f;
+  --github-a11y-h6-color: #4D6066;
   --github-a11y-heading-border: solid; /* set to none if you prefer no heading border */
   --github-a11y-img-invalid-border-color: red;
   --github-a11y-img-valid-border-color: grey;
