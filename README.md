@@ -8,10 +8,21 @@ This assumes you are using a Google Chrome browser.
 
 ## Setup
 
+### Chrome
+
 1. Download this repo as a `ZIP` file. You can also simply clone this repo.
 2. Navigate to `chrome://extensions/`.
 3. Select `Load unpacked`.
 4. Choose this unzipped repo folder.
+5. Navigate to github.com.
+6. **Optional but recommended**: Set custom styles to your preference. Learn more in [Customization note](#customization-note).
+
+### Firefox
+
+1. Clone or download this repo. Make sure to extract any compressed files to the directory structure of this project.
+2. Navigate to `about:debugging#/runtime/this-firefox`.
+3. Select `Load Temporary Add-on...`.
+4. Choose a file in the repository directory.
 5. Navigate to github.com.
 6. **Optional but recommended**: Set custom styles to your preference. Learn more in [Customization note](#customization-note).
 
