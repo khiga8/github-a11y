@@ -1,6 +1,6 @@
 # github-a11y
 
-This is a Google Chrome extension that runs a simple JavaScript snippet on github.com domain and aims to encourage accessibility mindfulness while navigating GitHub. Users interact with GitHub predominantly through the markdown editor. The markdown editor allows users to set headings and share images, both of which require care to ensure accessibility.
+This is a browser extension that runs a simple JavaScript snippet on github.com domain and aims to encourage accessibility mindfulness while navigating GitHub. Users interact with GitHub predominantly through the markdown editor. The markdown editor allows users to set headings and share images, both of which require care to ensure accessibility.
 
 ## Prerequisite
 
