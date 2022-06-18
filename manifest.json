@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-
   "name": "github-a11y",
   "description": "This extension helps increase accessibility mindfulness while using GitHub",
+  "devtools_page": "./devtools-feedback/devtools.html",
   "version": "0.5",
   "content_scripts": [
     {
