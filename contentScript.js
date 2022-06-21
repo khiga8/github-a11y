@@ -25,23 +25,17 @@ function appendAccessibilityInfo() {
   document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
     // Adds alt image overlay. This is hidden from accesibility tree.
     commentBody.querySelectorAll('img').forEach(function(image) {
-      let altText = image.getAttribute('alt');
-      if (!image.hasAttribute('alt')) {
+      const altText = image.getAttribute('alt').trim();
+      const linkElement = image.parentElement;
+      const linkText = linkElement.textContent.trim(); // GitHub currently strips ARIA attributes so we don't check.
+      if (!image.hasAttribute('alt') || altText === "" && linkText.length === 0) {
           image.classList.add('github-a11y-img-missing-alt')
       } else {
-          const parentElement = image.parentElement;
-          if (!parentElement) return;
-
           const subtitle = document.createElement('span');
           subtitle.classList.add('github-a11y-img-caption');
+          subtitle.classList.add('github-a11y-img-caption-with-alt');
 
-          if (altText === "") {
-            altText = "hidden"
-            subtitle.classList.add('github-a11y-img-caption-empty-alt')
-          } else {
-            subtitle.classList.add('github-a11y-img-caption-with-alt');
-          }
-          parentElement.classList.add('github-a11y-img-container');
+          linkElement.classList.add('github-a11y-img-container');
 
           subtitle.setAttribute('aria-hidden', 'true');
           subtitle.textContent = altText;
