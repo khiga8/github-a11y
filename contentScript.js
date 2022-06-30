@@ -67,23 +67,29 @@ chrome.runtime.onMessage.addListener(() => {
 
 appendAccessibilityInfo();
 
-const observer = new MutationObserver(function(mutationList) {
-  for (const mutation of mutationList) {
-    if (mutation.target.matches('.markdown-body') || mutation.target.matches('.js-commit-preview')) {
-      appendAccessibilityInfo();
+/* Debounce to avoid redundant appendAccessibilityInfo calls */
+let timer;
+let observer = new MutationObserver(function(mutationList) {
+  if (timer) clearTimeout(timer);
+  timer = setTimeout(() => {
+    for (const mutation of mutationList) {
+      observer.disconnect();
+      if (mutation.target.closest('.markdown-body')) {
+        appendAccessibilityInfo();
+      }
+      observe();
     }
-  }
+  }, 100);
 })
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
-
-document.addEventListener('turbo:load', () => {
-  appendAccessibilityInfo();
+const observe = ()=> {
   observer.observe(document.body, {
     childList: true,
     subtree: true
   });
+};
+
+document.addEventListener('turbo:load', () => {
+  appendAccessibilityInfo();
+  observe();
 })
