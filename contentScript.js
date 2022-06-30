@@ -65,14 +65,21 @@ chrome.runtime.onMessage.addListener(() => {
   appendAccessibilityInfo();
 });
 
-const observer = new MutationObserver(function(mutationList) {
-  for (const mutation of mutationList) {
-    observer.disconnect();
-    if (mutation.target.closest('.markdown-body')) {
-      appendAccessibilityInfo();
+appendAccessibilityInfo();
+
+/* Debounce to avoid redundant appendAccessibilityInfo calls */
+let timer;
+let observer = new MutationObserver(function(mutationList) {
+  if (timer) clearTimeout(timer);
+  timer = setTimeout(() => {
+    for (const mutation of mutationList) {
+      observer.disconnect();
+      if (mutation.target.closest('.markdown-body')) {
+        appendAccessibilityInfo();
+      }
+      observe();
     }
-    observe();
-  }
+  }, 100);
 })
 
 const observe = ()=> {
@@ -80,7 +87,6 @@ const observe = ()=> {
     childList: true,
     subtree: true
   });
-
 };
 
 document.addEventListener('turbo:load', () => {
