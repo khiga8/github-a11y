@@ -65,25 +65,25 @@ chrome.runtime.onMessage.addListener(() => {
   appendAccessibilityInfo();
 });
 
-appendAccessibilityInfo();
-
 const observer = new MutationObserver(function(mutationList) {
   for (const mutation of mutationList) {
-    if (mutation.target.matches('.markdown-body') || mutation.target.matches('.js-commit-preview')) {
+    observer.disconnect();
+    if (mutation.target.closest('.markdown-body')) {
       appendAccessibilityInfo();
     }
+    observe();
   }
 })
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
-
-document.addEventListener('turbo:load', () => {
-  appendAccessibilityInfo();
+const observe = ()=> {
   observer.observe(document.body, {
     childList: true,
     subtree: true
   });
+
+};
+
+document.addEventListener('turbo:load', () => {
+  appendAccessibilityInfo();
+  observe();
 })
