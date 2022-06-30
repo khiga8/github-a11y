@@ -4,8 +4,6 @@ This is a browser extension that runs a simple JavaScript snippet on github.com 
 
 ## Prerequisite
 
-This assumes you are using a Google Chrome browser.
-
 ## Setup
 
 ### Chrome
