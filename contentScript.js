@@ -25,23 +25,7 @@ function appendAccessibilityInfo() {
   document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
     // Adds alt image overlay. This is hidden from accesibility tree.
     commentBody.querySelectorAll('img').forEach(function(image) {
-      const altText = image.getAttribute('alt').trim();
-      const linkElement = image.parentElement;
-      const linkText = linkElement.textContent.trim(); // GitHub currently strips ARIA attributes so we don't check.
-      if (!image.hasAttribute('alt') || altText === "" && linkText.length === 0) {
-          image.classList.add('github-a11y-img-missing-alt')
-      } else {
-          const subtitle = document.createElement('span');
-          subtitle.classList.add('github-a11y-img-caption');
-          subtitle.classList.add('github-a11y-img-caption-with-alt');
-
-          linkElement.classList.add('github-a11y-img-container');
-
-          subtitle.setAttribute('aria-hidden', 'true');
-          subtitle.textContent = altText;
-          
-          image.insertAdjacentElement('afterend', subtitle);
-      }
+      validateImage(image)
     });
   
     // Appends heading level to headings. This is hidden from accesibility tree
@@ -52,6 +36,32 @@ function appendAccessibilityInfo() {
       addHeadingToBack(heading, headingPrefix); // Swappable with `addHeadingToFront`
     });
   });
+}
+
+function validateImage(image) {
+  const altText = image.getAttribute('alt') ? image.getAttribute('alt').trim() : "";
+  const parent = image.closest('a') || image.closest('button');
+  if (!parent) return
+  const parentAriaLabel = parent.getAttribute('aria-label') && parent.getAttribute('aria-label').trim()
+
+  if (!image.hasAttribute('alt') || altText === "" && !parentAriaLabel) {
+    image.classList.add('github-a11y-img-missing-alt')
+  } else {
+    const subtitle = document.createElement('span');
+    subtitle.classList.add('github-a11y-img-caption');
+    subtitle.classList.add('github-a11y-img-caption-with-alt');
+
+    parent.classList.add('github-a11y-img-container');
+    subtitle.setAttribute('aria-hidden', 'true');
+
+    if (parentAriaLabel) {
+      subtitle.textContent = parentAriaLabel;
+    } else {
+      subtitle.textContent = altText;
+    }
+
+    image.insertAdjacentElement('afterend', subtitle);
+  }
 }
 
 /* Listen for messages from the background script */
