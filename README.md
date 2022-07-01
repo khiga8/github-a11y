@@ -57,4 +57,5 @@ You can do this by modifying `styles.css`. There are CSS variables at the top wh
 
 ## Bug?
 
+This extension may break if GitHub markup changes.
 If you encounter a bug, please file a ticket. Contributions welcome.

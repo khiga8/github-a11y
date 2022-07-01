@@ -1,6 +1,4 @@
-/* ATTENTION: Based on heading position preference, swap `addHeadingToBack` with `addHeadingToFront` in line 45. */
-
-/* Places heading at end of line */
+/* Default. Places heading at end of line */
 function addHeadingToBack(heading, headingPrefix) {
   headingPrefix.classList.add('github-a11y-heading-prefix', 'github-a11y-heading-prefix-after');
   headingPrefix.textContent = ` ${heading.tagName.toLowerCase()}`;
@@ -16,19 +14,25 @@ function addHeadingToFront(heading, headingPrefix) {
   heading.insertBefore(headingPrefix, heading.firstChild);
 }
 
+/* Append accessibility info to DOM */
 function appendAccessibilityInfo() {
-  const elements = document.querySelectorAll('.github-a11y-heading-prefix, .github-a11y-img-caption')
-  for (const element of elements) {
+  const outdatedElements = document.querySelectorAll('.github-a11y-heading-prefix, .github-a11y-img-caption')
+  for (const element of outdatedElements) {
     element.remove();
   }
 
   document.querySelectorAll('.markdown-body').forEach(function(commentBody) {
-    // Adds alt image overlay. This is hidden from accesibility tree.
     commentBody.querySelectorAll('img').forEach(function(image) {
-      validateImage(image)
+      const parent = image.closest('a');
+      if (!parent || image.closest('animated-image')) return
+
+      validateImages(parent, image)
+    });
+
+    commentBody.querySelectorAll('animated-image').forEach(function(animatedImage) {
+      validateImagesInsideAnimatedPlayer(animatedImage)
     });
   
-    // Appends heading level to headings. This is hidden from accesibility tree
     commentBody.querySelectorAll('h1, h2, h3, h4, h5, h6').forEach(function(heading) {
       const headingPrefix = document.createElement('span');
       headingPrefix.setAttribute('aria-hidden', 'true');
@@ -38,21 +42,15 @@ function appendAccessibilityInfo() {
   });
 }
 
-function validateImage(image) {
+function validateImages(parent, image) {
   const altText = image.getAttribute('alt') ? image.getAttribute('alt').trim() : "";
-  const parent = image.closest('a') || image.closest('button');
-  if (!parent) return
   const parentAriaLabel = parent.getAttribute('aria-label') && parent.getAttribute('aria-label').trim()
 
   if (!image.hasAttribute('alt') || altText === "" && !parentAriaLabel) {
     image.classList.add('github-a11y-img-missing-alt')
   } else {
-    const subtitle = document.createElement('span');
-    subtitle.classList.add('github-a11y-img-caption');
-    subtitle.classList.add('github-a11y-img-caption-with-alt');
-
+    const subtitle = createSubtitleElement();
     parent.classList.add('github-a11y-img-container');
-    subtitle.setAttribute('aria-hidden', 'true');
 
     if (parentAriaLabel) {
       subtitle.textContent = parentAriaLabel;
@@ -61,6 +59,28 @@ function validateImage(image) {
     }
 
     image.insertAdjacentElement('afterend', subtitle);
+  }
+}
+
+function createSubtitleElement() {
+  const subtitle = document.createElement('span');
+  subtitle.setAttribute('aria-hidden', 'true');
+  subtitle.classList.add('github-a11y-img-caption', 'github-a11y-img-caption-with-alt');
+
+  return subtitle
+}
+
+function validateImagesInsideAnimatedPlayer(animatedImage) {
+  const image = animatedImage.querySelector('img');
+  const altText = image.getAttribute('alt') ? image.getAttribute('alt').trim() : "";
+
+  if (!image.hasAttribute('alt') || altText === "") {
+    animatedImage.classList.add('github-a11y-img-missing-alt')
+  } else {
+    const subtitle = createSubtitleElement();
+    subtitle.textContent = altText;
+    animatedImage.classList.add('github-a11y-img-container');
+    animatedImage.appendChild(subtitle);
   }
 }
 
@@ -78,7 +98,7 @@ let observer = new MutationObserver(function(mutationList) {
   timer = setTimeout(() => {
     for (const mutation of mutationList) {
       observer.disconnect();
-      if (mutation.target.closest('.markdown-body')) {
+      if (mutation.target.closest('.markdown-body, .js-commit-preview')) {
         appendAccessibilityInfo();
       }
       observe();
