@@ -6,7 +6,7 @@ This is a browser extension that runs a simple JavaScript snippet on github.com 
 
 ### Chrome
 
-1. Download this repo as a `ZIP` file. You can also simply clone this repo.
+1. Clone or download this repo.
 2. Navigate to `chrome://extensions/`.
 3. Flip on "Developer Mode" in the upper right-hand corner.
 4. Select "Load unpacked".
