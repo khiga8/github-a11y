@@ -7,15 +7,21 @@ function updateMain(content) {
 }
 
 function detectGitHubWindow() {
-  chrome.tabs.getSelected(null, function (tab) {
-    if (tab.url.includes("https://github.com")) {
-      updateMain(
-        "Welcome to GitHub! Find a Markdown Editor to get feedback on."
-      );
-    } else {
-      updateMain("Navigate to GitHub.com to get started");
+  chrome.tabs.query(
+    {
+      active: true,
+      lastFocusedWindow: true,
+    },
+    function (tabs) {
+      if (tabs[0].url.includes("https://github.com")) {
+        updateMain(
+          "Welcome to GitHub! Find a Markdown Editor to get feedback on."
+        );
+      } else {
+        updateMain("Navigate to GitHub.com to get started");
+      }
     }
-  });
+  );
 }
 
 function detectIfEditor(element) {
@@ -57,23 +63,29 @@ function provideFeedback(textContent, type) {
 function validate() {
   console.log("TRYING TO CONNECT...");
 
-  chrome.tabs.getSelected(null, function (tab) {
-    var port = chrome.tabs.connect(tab.id);
-    port.postMessage({ request: "activeElement" });
+  chrome.tabs.query(
+    {
+      active: true,
+      lastFocusedWindow: true,
+    },
+    function (tabs) {
+      var port = chrome.tabs.connect(tabs[0].id);
+      port.postMessage({ request: "activeElement" });
 
-    port.onMessage.addListener((msg) => {
-      console.log(msg.textAreaOutput);
-      const { textAreaOutput, type } = msg;
+      port.onMessage.addListener((msg) => {
+        console.log(msg.textAreaOutput);
+        const { textAreaOutput, type } = msg;
 
-      const feedback = provideFeedback(textAreaOutput, type);
+        const feedback = provideFeedback(textAreaOutput, type);
 
-      if (feedback) {
-        updateMain(`<h2>${feedback.title}:</h2><p>${feedback.message}</p>`);
-      } else {
-        updateMain(`<h2>Looks perfect </h2>`);
-      }
-    });
-  });
+        if (feedback) {
+          updateMain(`<h2>${feedback.title}:</h2><p>${feedback.message}</p>`);
+        } else {
+          updateMain(`<h2>Looks perfect </h2>`);
+        }
+      });
+    }
+  );
 }
 
 detectGitHubWindow();

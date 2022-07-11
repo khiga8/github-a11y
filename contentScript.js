@@ -1,6 +1,4 @@
-/* ATTENTION: Based on heading position preference, swap `addHeadingToBack` with `addHeadingToFront` in line 45. */
-
-/* Places heading at end of line */
+/* Default. Places heading at end of line */
 function addHeadingToBack(heading, headingPrefix) {
   headingPrefix.classList.add(
     "github-a11y-heading-prefix",
@@ -19,43 +17,29 @@ function addHeadingToFront(heading, headingPrefix) {
   heading.insertBefore(headingPrefix, heading.firstChild);
 }
 
+/* Append accessibility info to DOM */
 function appendAccessibilityInfo() {
-  const elements = document.querySelectorAll(
+  const outdatedElements = document.querySelectorAll(
     ".github-a11y-heading-prefix, .github-a11y-img-caption"
   );
-  for (const element of elements) {
+  for (const element of outdatedElements) {
     element.remove();
   }
 
   document.querySelectorAll(".markdown-body").forEach(function (commentBody) {
-    // Adds alt image overlay. This is hidden from accesibility tree.
     commentBody.querySelectorAll("img").forEach(function (image) {
-      let altText = image.getAttribute("alt");
-      if (!image.hasAttribute("alt")) {
-        image.classList.add("github-a11y-img-missing-alt");
-      } else {
-        const parentElement = image.parentElement;
-        if (!parentElement) return;
+      const parent = image.closest("a");
+      if (!parent || image.closest("animated-image")) return;
 
-        const subtitle = document.createElement("span");
-        subtitle.classList.add("github-a11y-img-caption");
-
-        if (altText === "") {
-          altText = "hidden";
-          subtitle.classList.add("github-a11y-img-caption-empty-alt");
-        } else {
-          subtitle.classList.add("github-a11y-img-caption-with-alt");
-        }
-        parentElement.classList.add("github-a11y-img-container");
-
-        subtitle.setAttribute("aria-hidden", "true");
-        subtitle.textContent = altText;
-
-        image.insertAdjacentElement("afterend", subtitle);
-      }
+      validateImages(parent, image);
     });
 
-    // Appends heading level to headings. This is hidden from accesibility tree
+    commentBody
+      .querySelectorAll("animated-image")
+      .forEach(function (animatedImage) {
+        validateImagesInsideAnimatedPlayer(animatedImage);
+      });
+
     commentBody
       .querySelectorAll("h1, h2, h3, h4, h5, h6")
       .forEach(function (heading) {
@@ -67,6 +51,57 @@ function appendAccessibilityInfo() {
   });
 }
 
+function validateImages(parent, image) {
+  const altText = image.getAttribute("alt")
+    ? image.getAttribute("alt").trim()
+    : "";
+  const parentAriaLabel =
+    parent.getAttribute("aria-label") &&
+    parent.getAttribute("aria-label").trim();
+
+  if (!image.hasAttribute("alt") || (altText === "" && !parentAriaLabel)) {
+    image.classList.add("github-a11y-img-missing-alt");
+  } else {
+    const subtitle = createSubtitleElement();
+    parent.classList.add("github-a11y-img-container");
+
+    if (parentAriaLabel) {
+      subtitle.textContent = parentAriaLabel;
+    } else {
+      subtitle.textContent = altText;
+    }
+
+    image.insertAdjacentElement("afterend", subtitle);
+  }
+}
+
+function createSubtitleElement() {
+  const subtitle = document.createElement("span");
+  subtitle.setAttribute("aria-hidden", "true");
+  subtitle.classList.add(
+    "github-a11y-img-caption",
+    "github-a11y-img-caption-with-alt"
+  );
+
+  return subtitle;
+}
+
+function validateImagesInsideAnimatedPlayer(animatedImage) {
+  const image = animatedImage.querySelector("img");
+  const altText = image.getAttribute("alt")
+    ? image.getAttribute("alt").trim()
+    : "";
+
+  if (!image.hasAttribute("alt") || altText === "") {
+    animatedImage.classList.add("github-a11y-img-missing-alt");
+  } else {
+    const subtitle = createSubtitleElement();
+    subtitle.textContent = altText;
+    animatedImage.classList.add("github-a11y-img-container");
+    animatedImage.appendChild(subtitle);
+  }
+}
+
 /* Listen for messages from the background script */
 chrome.runtime.onMessage.addListener(() => {
   appendAccessibilityInfo();
@@ -74,28 +109,31 @@ chrome.runtime.onMessage.addListener(() => {
 
 appendAccessibilityInfo();
 
-const observer = new MutationObserver(function (mutationList) {
-  for (const mutation of mutationList) {
-    if (
-      mutation.target.matches(".markdown-body") ||
-      mutation.target.matches(".js-commit-preview")
-    ) {
-      appendAccessibilityInfo();
+/* Debounce to avoid redundant appendAccessibilityInfo calls */
+let timer;
+let observer = new MutationObserver(function (mutationList) {
+  if (timer) clearTimeout(timer);
+  timer = setTimeout(() => {
+    for (const mutation of mutationList) {
+      observer.disconnect();
+      if (mutation.target.closest(".markdown-body, .js-commit-preview")) {
+        appendAccessibilityInfo();
+      }
+      observe();
     }
-  }
+  }, 100);
 });
 
-observer.observe(document.body, {
-  childList: true,
-  subtree: true,
-});
-
-document.addEventListener("turbo:load", () => {
-  appendAccessibilityInfo();
+const observe = () => {
   observer.observe(document.body, {
     childList: true,
     subtree: true,
   });
+};
+
+document.addEventListener("turbo:load", () => {
+  appendAccessibilityInfo();
+  observe();
 });
 
 /** Validating Markdown */
