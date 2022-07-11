@@ -53,7 +53,7 @@ function provideFeedback(element) {
 }
 
 function detectGitHubWindow() {
-    if (window.location.includes('https://github.com')) {
+    if (window.location.href.includes('https://github.com')) {
         updateMain('Welcome to GitHub! Find a Markdown Editor to get feedback on.');
     }
 
