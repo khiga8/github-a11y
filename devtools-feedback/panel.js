@@ -20,33 +20,14 @@ function detectGitHubWindow() {
 
 function detectIfEditor(element) {
   return (
-    element.getAttribute("class").includes("CodeMirror") ||
-    element.tagName === "TEXTAREA"
+    (element && element.getAttribute("class").includes("CodeMirror")) ||
+    (element && element.tagName === "TEXTAREA")
   );
 }
 
-function getType(element) {
-  if (
-    element.tagName === "TEXTAREA" &&
-    element.getAttribute("name").includes("comment")
-  ) {
-    return "comment";
-  }
-
-  if (
-    element.tagName === "TEXTAREA" &&
-    element.getAttribute("name").includes("issue")
-  ) {
-    return "issue";
-  }
-}
-
 const LEVEL_1_HEADING_REGEX = /\#\s/g;
-function provideFeedback(element) {
-  const textContent = element.innerText;
-  const type = getType(element);
-
-  const hasHeading = textContent.contains("#");
+function provideFeedback(textContent, type) {
+  const hasHeading = textContent && textContent.includes("#");
   if (!hasHeading) {
     return {
       title: "Missing Headings",
@@ -75,28 +56,24 @@ function provideFeedback(element) {
 
 function validate() {
   console.log("TRYING TO CONNECT...");
-  //works for the background
-  //   var port = chrome.runtime.connect({ name: "activeElement" });
-  //   port.postMessage({ request: "activeElement" });
-
-  //   port.onMessage.addListener((msg) => {
-  //     console.log(msg.response);
-  //   });
 
   chrome.tabs.getSelected(null, function (tab) {
     var port = chrome.tabs.connect(tab.id);
     port.postMessage({ request: "activeElement" });
 
     port.onMessage.addListener((msg) => {
-      console.log(msg.response);
+      console.log(msg.textAreaOutput);
+      const { textAreaOutput, type } = msg;
+
+      const feedback = provideFeedback(textAreaOutput, type);
+
+      if (feedback) {
+        updateMain(`<h2>${feedback.title}:</h2><p>${feedback.message}</p>`);
+      } else {
+        updateMain(`<h2>Looks perfect </h2>`);
+      }
     });
   });
-  //   if (detectIfEditor(document.activeElement)) {
-  //     const feedback = provideFeedback(document.activeElement);
-  //     if (feedback) {
-  //       updateMain(`<h2>${feedback.title}:</h2><p>${feedback.message}</p>`);
-  //     }
-  //   }
 }
 
 detectGitHubWindow();

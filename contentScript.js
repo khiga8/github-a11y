@@ -68,12 +68,8 @@ function appendAccessibilityInfo() {
 }
 
 /* Listen for messages from the background script */
-chrome.runtime.onMessage.addListener((request, sendResponse) => {
-  if (request === "activeElement") {
-    sendResponse({ response: document });
-  } else {
-    appendAccessibilityInfo();
-  }
+chrome.runtime.onMessage.addListener(() => {
+  appendAccessibilityInfo();
 });
 
 appendAccessibilityInfo();
@@ -102,11 +98,49 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
+/** Validating Markdown */
+
+function getType(element) {
+  if (
+    element.tagName === "TEXTAREA" &&
+    element.getAttribute("name").includes("comment")
+  ) {
+    return "comment";
+  }
+
+  if (
+    element.tagName === "TEXTAREA" &&
+    element.getAttribute("name").includes("issue")
+  ) {
+    return "issue";
+  }
+}
+
 chrome.runtime.onConnect.addListener(function (port) {
   alert("CONNECTED");
   port.onMessage.addListener(function (msg) {
     if (msg.request === "activeElement") {
-      port.postMessage({ response: document.activeElement.id });
+      console.log(
+        " document.activeElement.value",
+        document.activeElement.value
+      );
+      if (
+        (document.activeElement &&
+          document.activeElement
+            .getAttribute("class")
+            .includes("CodeMirror")) ||
+        (document.activeElement &&
+          document.activeElement.tagName === "TEXTAREA")
+      ) {
+        console.log("IN HERE");
+        port.postMessage({
+          textAreaOutput: document.activeElement.value,
+          type: getType(document.activeElement),
+        });
+      }
+    } else {
+      // work on this later but basically add a state that says we did not find anything to validate
+      port.postMessage({ textAreaOutput: "" });
     }
   });
 });
