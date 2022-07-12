@@ -155,30 +155,43 @@ function getType(element) {
 }
 
 chrome.runtime.onConnect.addListener(function (port) {
-  alert("CONNECTED");
   port.onMessage.addListener(function (msg) {
-    if (msg.request === "activeElement") {
-      console.log(
-        " document.activeElement.value",
-        document.activeElement.value
-      );
-      if (
-        (document.activeElement &&
-          document.activeElement
-            .getAttribute("class")
-            .includes("CodeMirror")) ||
-        (document.activeElement &&
-          document.activeElement.tagName === "TEXTAREA")
-      ) {
-        console.log("IN HERE");
-        port.postMessage({
-          textAreaOutput: document.activeElement.value,
-          type: getType(document.activeElement),
-        });
+    if (msg.request === "getTextAreas") {
+      const markdownTextAreas =
+        Array.from(document.querySelectorAll("textArea")) || [];
+      const results = [];
+
+      // TODO: add in CodeMirrors
+      // const codeMirrors = Array.from(document.querySelectorAll(".CodeMirror"));
+      // [...markdownTextAreas, ...codeMirrors].forEach
+
+      markdownTextAreas.forEach((textArea) => {
+        // if the element is not hidden
+        if (textArea.clientWidth) {
+          results.push({
+            textAreaOutput: textArea.value,
+            type: getType(textArea),
+            id: textArea.id,
+          });
+        }
+      });
+
+      port.postMessage({ results: results });
+    } else if (msg.request === "focusComponent") {
+      (
+        Array.from(document.getElementsByClassName("github-a11y-highlight")) ||
+        []
+      ).forEach((element) => {
+        element.classList.remove("github-a11y-highlight");
+      });
+
+      const textArea = document.getElementById(msg.id);
+      if (textArea) {
+        // We don't have to do this but for now I am highlighting the component
+        textArea.classList.add("github-a11y-highlight");
+        textArea.focus();
+        textArea.scrollIntoView();
       }
-    } else {
-      // work on this later but basically add a state that says we did not find anything to validate
-      port.postMessage({ textAreaOutput: "" });
     }
   });
 });

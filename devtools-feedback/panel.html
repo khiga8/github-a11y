@@ -1,16 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="panel.css" />
     <title>Mona's Markdown a11y</title>
-</head>
-<body>
-    <h1>Mona's Markdown a11y</h1>
-    <p>Get feedback on the Markdown you're writing in GitHub</p>
+  </head>
+  <body>
+    <div class="topSection">
+      <div class="heading">
+        <img class="monaLisa" alt="" src="./toast.png" />
+        <h1>Mona's Markdown A11y</h1>
+      </div>
+      <p>Get feedback on the Markdown you're writing in GitHub</p>
+      <button id="mona-validate-markdown" class="validationButton">
+        Validate Markdown
+      </button>
+    </div>
+
     <main id="main"></main>
-    <button id='mona-validate-markdown'>Validate Markdown</button>
+
     <script src="panel.js"></script>
-</body>
+  </body>
 </html>

@@ -1,0 +1,98 @@
+:root {
+  /* Feel free to customize colors to your preference */
+  --github-a11y-light-blue: #58a6ff;
+  --github-a11y-blue: rgb(13, 65, 157);
+  --github-a11y-light-grey: rgb(33, 38, 45);
+  --github-a11y-background: rgb(13, 17, 23);
+  --github-a11y-font-color: rgb(201, 209, 217);
+  --github-a11y-border-color: rgba(240, 246, 252, 0.1);
+}
+
+body {
+  background-color: var(--github-a11y-background);
+  color: var(--github-a11y-font-color);
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji";
+  font-size: 14px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background-color: rgba(33, 38, 45, 0.5);
+  padding: 16px;
+  border-radius: 4px;
+  margin-top: 12px;
+}
+
+a {
+  color: var(--github-a11y-light-blue);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--github-a11y-light-blue);
+}
+
+.monaLisa {
+  width: 65px;
+}
+
+.validationButton {
+  margin: 24px 0;
+}
+
+button {
+  text-decoration: none;
+  padding: 0.75em 1.25em;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--github-a11y-light-blue);
+  background-color: var(--github-a11y-light-grey);
+  border: 1px solid var(--github-a11y-border-color);
+}
+
+button:hover {
+  background-color: var(--github-a11y-border-color);
+  text-decoration: none;
+  color: var(--github-a11y-light-blue);
+  border: 1px solid var(--github-a11y-border-color);
+}
+
+button:active {
+  color: rgb(255, 255, 255);
+  background-color: var(--github-a11y-blue);
+  border: 1px solid var(--github-a11y-blue);
+}
+
+button:disabled {
+  cursor: default;
+  color: rgba(88, 166, 255, 0.5);
+  background-color: var(--github-a11y-background);
+  border-color: rgba(240, 246, 252, 0.1);
+}
+
+.instructions {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+}

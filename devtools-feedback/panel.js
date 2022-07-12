@@ -2,24 +2,33 @@ const HELPER_LINKS = {
   headings: "https://www.markdownguide.org/basic-syntax/#headings",
 };
 
-function updateMain(content) {
-  document.getElementById("main").innerHTML = content;
+function refreshMain(element) {
+  document.getElementById("main").innerHTML = "";
+  return document.getElementById("main").append(element);
 }
 
-function detectGitHubWindow() {
+function detectGitHubWindow(validationButton) {
   chrome.tabs.query(
     {
       active: true,
       lastFocusedWindow: true,
     },
     function (tabs) {
+      const instructions = document.createElement("p");
+
+      instructions.classList.add("instructions");
+
       if (tabs[0].url.includes("https://github.com")) {
-        updateMain(
-          "Welcome to GitHub! Find a Markdown Editor to get feedback on."
-        );
+        instructions.innerText =
+          "Welcome to GitHub! Click validate markdown to get feedback on your Github markdown.";
+        validationButton.ariaDisabled = "false";
+        validationButton.disabled = false;
       } else {
-        updateMain("Navigate to GitHub.com to get started");
+        instructions.innerText = "Navigate to GitHub.com to get started";
+        validationButton.ariaDisabled = "true";
+        validationButton.disabled = true;
       }
+      refreshMain(instructions);
     }
   );
 }
@@ -60,36 +69,67 @@ function provideFeedback(textContent, type) {
   }
 }
 
-function validate() {
-  console.log("TRYING TO CONNECT...");
-
+function focus(id) {
   chrome.tabs.query(
     {
       active: true,
       lastFocusedWindow: true,
     },
     function (tabs) {
-      var port = chrome.tabs.connect(tabs[0].id);
-      port.postMessage({ request: "activeElement" });
+      const port = chrome.tabs.connect(tabs[0].id);
+      port.postMessage({ request: "focusComponent", id: id });
+    }
+  );
+}
+
+function validate() {
+  chrome.tabs.query(
+    {
+      active: true,
+      lastFocusedWindow: true,
+    },
+    function (tabs) {
+      const port = chrome.tabs.connect(tabs[0].id);
+      const list = document.createElement("ul");
+
+      port.postMessage({ request: "getTextAreas" });
 
       port.onMessage.addListener((msg) => {
-        console.log(msg.textAreaOutput);
-        const { textAreaOutput, type } = msg;
+        msg.results.forEach((textArea) => {
+          const { textAreaOutput, type, id } = textArea;
+          const feedback = provideFeedback(textAreaOutput, type);
 
-        const feedback = provideFeedback(textAreaOutput, type);
+          if (feedback) {
+            const listItem = document.createElement("li");
+            const heading = document.createElement("h2");
+            const paragraph = document.createElement("p");
+            const highlightButton = document.createElement("button");
 
-        if (feedback) {
-          updateMain(`<h2>${feedback.title}:</h2><p>${feedback.message}</p>`);
+            heading.innerHTML = feedback.title;
+            paragraph.innerHTML = feedback.message;
+            highlightButton.innerText = "Find Component";
+            highlightButton.addEventListener("click", () => focus(id));
+
+            listItem.append(heading);
+            listItem.append(paragraph);
+            listItem.append(highlightButton);
+            list.append(listItem);
+          }
+        });
+        if (msg.results.length === 0 || list.innerHTML === "") {
+          const heading = document.createElement("h2");
+          heading.innerText = "Everything looks good!";
+          refreshMain(heading);
         } else {
-          updateMain(`<h2>Looks perfect </h2>`);
+          refreshMain(list);
         }
       });
     }
   );
 }
 
-detectGitHubWindow();
+const validationButton = document.getElementById("mona-validate-markdown");
+
+detectGitHubWindow(validationButton);
 validate();
-document
-  .getElementById("mona-validate-markdown")
-  .addEventListener("click", validate);
+validationButton.addEventListener("click", validate);
