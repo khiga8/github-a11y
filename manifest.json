@@ -9,6 +9,11 @@
       "matches": ["https://github.com/*", "https://gist.github.com/*"],
       "css": ["styles.css"],
       "js": ["contentScript.js"]
+    },
+    {
+      "matches": ["https://github.com/*", "https://gist.github.com/*"],
+      "css": ["./devtools-feedback/contentScriptStyles.css"],
+      "js": ["./devtools-feedback/contentScript.js"]
     }
   ],
   "background": {

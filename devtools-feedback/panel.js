@@ -1,51 +1,28 @@
+const LEVEL_1_HEADING_REGEX = /\#\s/g;
 const HELPER_LINKS = {
   headings: "https://www.markdownguide.org/basic-syntax/#headings",
 };
 
-function refreshMain(element) {
+const replaceMainContent = (element) => {
   document.getElementById("main").innerHTML = "";
   return document.getElementById("main").append(element);
-}
+};
 
-function detectGitHubWindow(validationButton) {
-  chrome.tabs.query(
-    {
-      active: true,
-      lastFocusedWindow: true,
-    },
-    function (tabs) {
-      const instructions = document.createElement("p");
+const disableButton = (button) => {
+  button.ariaDisabled = "true";
+  button.disabled = true;
+};
 
-      instructions.classList.add("instructions");
+const enableButton = (button) => {
+  button.ariaDisabled = "false";
+  button.disabled = false;
+};
 
-      if (tabs[0].url.includes("https://github.com")) {
-        instructions.innerText =
-          "Welcome to GitHub! Click validate markdown to get feedback on your Github markdown.";
-        validationButton.ariaDisabled = "false";
-        validationButton.disabled = false;
-      } else {
-        instructions.innerText = "Navigate to GitHub.com to get started";
-        validationButton.ariaDisabled = "true";
-        validationButton.disabled = true;
-      }
-      refreshMain(instructions);
-    }
-  );
-}
-
-function detectIfEditor(element) {
-  return (
-    (element && element.getAttribute("class").includes("CodeMirror")) ||
-    (element && element.tagName === "TEXTAREA")
-  );
-}
-
-const LEVEL_1_HEADING_REGEX = /\#\s/g;
-function provideFeedback(textContent, type) {
+const provideFeedback = (textContent, type) => {
   const hasHeading = textContent && textContent.includes("#");
   if (!hasHeading) {
     return {
-      title: "Missing Headings",
+      title: "Missing Heading",
       message: `Looks like you haven\'t added any headings to your ${type} body. <a href="${HELPER_LINKS.headings}">Learn how to use Markdown Headings</a>`,
     };
   }
@@ -67,9 +44,9 @@ function provideFeedback(textContent, type) {
   if (usesBadAltText) {
     return {};
   }
-}
+};
 
-function focus(id) {
+const focus = (id) => {
   chrome.tabs.query(
     {
       active: true,
@@ -80,9 +57,9 @@ function focus(id) {
       port.postMessage({ request: "focusComponent", id: id });
     }
   );
-}
+};
 
-function validate() {
+const validateMarkdown = () => {
   chrome.tabs.query(
     {
       active: true,
@@ -119,17 +96,44 @@ function validate() {
         if (msg.results.length === 0 || list.innerHTML === "") {
           const heading = document.createElement("h2");
           heading.innerText = "Everything looks good!";
-          refreshMain(heading);
+          replaceMainContent(heading);
         } else {
-          refreshMain(list);
+          replaceMainContent(list);
         }
       });
     }
   );
-}
+};
 
-const validationButton = document.getElementById("mona-validate-markdown");
+const initializePanel = () => {
+  const validateMarkdownButton = document.getElementById(
+    "mona-validate-markdown"
+  );
+  validateMarkdownButton.addEventListener("click", validateMarkdown);
 
-detectGitHubWindow(validationButton);
-validate();
-validationButton.addEventListener("click", validate);
+  chrome.tabs.query(
+    {
+      active: true,
+      lastFocusedWindow: true,
+    },
+    function (tabs) {
+      const instructions = document.createElement("p");
+      instructions.classList.add("instructions");
+
+      if (tabs[0].url.includes("https://github.com")) {
+        // instructs the user on how to validate their markdown
+        instructions.innerText =
+          "Welcome to GitHub! Click validate markdown to get feedback on your Github markdown.";
+        replaceMainContent(instructions);
+        enableButton(validateMarkdownButton);
+      } else {
+        // instructs the user to navigate to github to use the validator
+        instructions.innerText = "Navigate to GitHub.com to get started";
+        replaceMainContent(instructions);
+        disableButton(validateMarkdownButton);
+      }
+    }
+  );
+};
+
+initializePanel();

@@ -1,11 +1,13 @@
 :root {
   /* Feel free to customize colors to your preference */
-  --github-a11y-light-blue: #58a6ff;
+  --github-a11y-light-blue: #rgb(88, 166, 255);
   --github-a11y-blue: rgb(13, 65, 157);
+  --github-a11y-blue-grey: rgba(88, 166, 255, 0.5);
   --github-a11y-light-grey: rgb(33, 38, 45);
   --github-a11y-background: rgb(13, 17, 23);
   --github-a11y-font-color: rgb(201, 209, 217);
   --github-a11y-border-color: rgba(240, 246, 252, 0.1);
+  --github-a11y-background-accent: rgba(33, 38, 45, 0.5);
 }
 
 body {
@@ -21,7 +23,7 @@ ul {
   padding: 0;
 }
 li {
-  background-color: rgba(33, 38, 45, 0.5);
+  background-color: var(--github-a11y-background-accent);
   padding: 16px;
   border-radius: 4px;
   margin-top: 12px;
@@ -86,13 +88,16 @@ button:active {
 
 button:disabled {
   cursor: default;
-  color: rgba(88, 166, 255, 0.5);
+  color: var(--github-a11y-blue-grey);
   background-color: var(--github-a11y-background);
-  border-color: rgba(240, 246, 252, 0.1);
+  border-color: var(--github-a11y-border-color);
 }
 
 .instructions {
   font-size: 16px;
+}
+
+.main {
   display: flex;
   justify-content: center;
 }
