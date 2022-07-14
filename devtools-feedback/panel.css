@@ -22,7 +22,12 @@ ul {
   list-style: none;
   padding: 0;
 }
-li {
+
+.divider {
+  border-top: 1px solid var(--github-a11y-border-color);
+}
+
+.feedbackGroup {
   background-color: var(--github-a11y-background-accent);
   padding: 16px;
   border-radius: 4px;
