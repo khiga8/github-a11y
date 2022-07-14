@@ -25,6 +25,7 @@ ul {
 
 .divider {
   border-top: 1px solid var(--github-a11y-border-color);
+  margin-bottom: 12px;
 }
 
 .feedbackGroup {
@@ -55,6 +56,13 @@ a:hover {
   justify-content: center;
   align-items: center;
   color: var(--github-a11y-light-blue);
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 
 .monaLisa {

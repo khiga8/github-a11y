@@ -7,7 +7,7 @@ import {
   invalidLinks,
   createErrorListItem,
   createFeedbackGroup,
-} from "./utils";
+} from "./utils.js";
 
 const replaceMainContent = (element) => {
   document.getElementById("main").innerHTML = "";
@@ -70,7 +70,7 @@ const provideFeedback = (textContent, type, id) => {
   if (usesBadAltText) {
     // return {};
   }
-  return list;
+  return list.childNodes.length ? list : undefined;
 };
 
 const focus = (id) => {
@@ -106,7 +106,8 @@ const validateMarkdown = () => {
           const feedback = provideFeedback(textAreaOutput, type);
 
           if (feedback) {
-            listItem = createFeedbackGroup(id, () => focus(id));
+            const listItem = createFeedbackGroup(id, () => focus(id));
+            listItem.append(feedback);
             list.append(listItem);
           }
         });
@@ -123,33 +124,51 @@ const validateMarkdown = () => {
   );
 };
 
-const initializePanel = () => {
-  const validateMarkdownButton = document.getElementById(
-    "mona-validate-markdown"
-  );
-  validateMarkdownButton.addEventListener("click", validateMarkdown);
+const determineWelcomeMessage = (tabs, validateMarkdownButton) => {
+  const instructions = document.createElement("p");
+  instructions.classList.add("instructions");
 
+  if (tabs[0].url.includes("https://github.com")) {
+    // instructs the user on how to validate their markdown
+    instructions.innerText =
+      "Welcome to GitHub! Click validate markdown to get feedback on your Github markdown.";
+    replaceMainContent(instructions);
+    enableButton(validateMarkdownButton);
+  } else {
+    // instructs the user to navigate to github to use the validator
+    instructions.innerText = "Navigate to GitHub.com to get started";
+    replaceMainContent(instructions);
+    disableButton(validateMarkdownButton);
+  }
+};
+
+const initializePanel = () => {
   chrome.tabs.query(
     {
       active: true,
       lastFocusedWindow: true,
     },
     function (tabs) {
-      const instructions = document.createElement("p");
-      instructions.classList.add("instructions");
+      const validateMarkdownButton = document.getElementById(
+        "mona-validate-markdown"
+      );
+      const resetButton = document.getElementById("mona-reset");
+      disableButton(resetButton);
 
-      if (tabs[0].url.includes("https://github.com")) {
-        // instructs the user on how to validate their markdown
-        instructions.innerText =
-          "Welcome to GitHub! Click validate markdown to get feedback on your Github markdown.";
-        replaceMainContent(instructions);
-        enableButton(validateMarkdownButton);
-      } else {
-        // instructs the user to navigate to github to use the validator
-        instructions.innerText = "Navigate to GitHub.com to get started";
-        replaceMainContent(instructions);
-        disableButton(validateMarkdownButton);
-      }
+      validateMarkdownButton.addEventListener("click", () => {
+        enableButton(resetButton);
+        validateMarkdown();
+      });
+
+      resetButton.addEventListener("click", () => {
+        // clear focus
+        focus();
+        // reset instructions
+        determineWelcomeMessage(tabs, validateMarkdownButton);
+        disableButton(resetButton);
+      });
+
+      determineWelcomeMessage(tabs, validateMarkdownButton);
     }
   );
 };

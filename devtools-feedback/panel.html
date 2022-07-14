@@ -14,12 +14,15 @@
         <h1>Mona's Markdown A11y</h1>
       </div>
       <p>Get feedback on the Markdown you're writing in GitHub</p>
-      <button id="mona-validate-markdown" class="validationButton">
-        Validate Markdown
-      </button>
+      <div class="options">
+        <button id="mona-validate-markdown" class="validationButton">
+          Validate Markdown
+        </button>
+        <button id="mona-reset" class="validationButton">Reset</button>
+      </div>
     </div>
     <main id="main" class="main"></main>
-
-    <script src="panel.js"></script>
+    <script type="module" src="utils.js"></script>
+    <script type="module" src="panel.js"></script>
   </body>
 </html>

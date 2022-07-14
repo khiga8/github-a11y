@@ -5,7 +5,7 @@ import {
   disableButton,
   enableButton,
   invalidLinks,
-} from "../utils";
+} from "../utils.js";
 
 describe("Regex", () => {
   test("LEVEL_1_HEADING_REGEX", () => {

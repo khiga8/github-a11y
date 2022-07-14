@@ -44,7 +44,6 @@ chrome.runtime.onConnect.addListener(function (port) {
 
       const textArea = document.getElementById(msg.id);
       if (textArea) {
-        // We don't have to do this but for now I am highlighting the component
         textArea.classList.add("github-a11y-highlight");
         textArea.focus();
         textArea.scrollIntoView();

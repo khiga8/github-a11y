@@ -68,7 +68,6 @@ export const createFeedbackGroup = (id, highlightEvent) => {
 
   listItem.append(heading);
   listItem.append(divider);
-  listItem.append(feedback);
   listItem.append(highlightButton);
 
   return listItem;
