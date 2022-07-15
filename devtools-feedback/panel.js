@@ -19,12 +19,13 @@ const replaceMainContent = (element) => {
  * return a list of accessibility errors found
  *
  * WORKING RULES:
- * - checks for a heading
+ *
  * - ensures that there is no h1
  * - ensures that links are descriptive
  *
  *
  * TODO:
+ * - checks for a heading - this rule can get complex because some comments do not require a heading
  * - validate image alt text
  * - Report bugs individually. For example we report the "Non Descriptive Links" error once ... even if multiple links are not descriptive
  *   but it would be nice to report each link individually to provide more descriptive feedback.
@@ -33,16 +34,16 @@ const provideFeedback = (textContent, type, id) => {
   const list = document.createElement("ul");
   list.ariaLabel = `Errors found in textArea with id: ${id}`;
 
-  const hasHeading = textContent && textContent.includes("#");
+  // const hasHeading = textContent && textContent.includes("#");
 
-  if (!hasHeading) {
-    list.append(
-      createErrorListItem(
-        "Missing Heading",
-        `Looks like you haven\'t added any headings to your ${type} body. <a href="${HELPER_LINKS.headings}">Learn how to use Markdown Headings</a>`
-      )
-    );
-  }
+  // if (!hasHeading) {
+  //   list.append(
+  //     createErrorListItem(
+  //       "Missing Heading",
+  //       `Looks like you haven\'t added any headings to your ${type} body. <a href="${HELPER_LINKS.headings}">Learn how to use Markdown Headings</a>`
+  //     )
+  //   );
+  // }
 
   const usesLevel1Heading = textContent.match(LEVEL_1_HEADING_REGEX);
   if (usesLevel1Heading) {

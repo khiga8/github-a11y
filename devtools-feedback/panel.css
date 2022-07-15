@@ -1,6 +1,6 @@
 :root {
   /* Feel free to customize colors to your preference */
-  --github-a11y-light-blue: #rgb(88, 166, 255);
+  --github-a11y-light-blue: rgb(88, 166, 255);
   --github-a11y-blue: rgb(13, 65, 157);
   --github-a11y-blue-grey: rgba(88, 166, 255, 0.5);
   --github-a11y-light-grey: rgb(33, 38, 45);
