@@ -2,13 +2,18 @@
   "manifest_version": 3,
   "name": "github-a11y",
   "description": "This extension helps increase accessibility mindfulness while using GitHub",
+  "devtools_page": "./devtools-feedback/devtools.html",
   "version": "0.6",
   "content_scripts": [
     {
       "matches": ["https://github.com/*", "https://gist.github.com/*"],
       "css": ["styles.css"],
       "js": ["contentScript.js"]
-
+    },
+    {
+      "matches": ["https://github.com/*", "https://gist.github.com/*"],
+      "css": ["./devtools-feedback/contentScriptStyles.css"],
+      "js": ["./devtools-feedback/contentScript.js"]
     }
   ],
   "background": {
