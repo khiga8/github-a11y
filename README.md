@@ -12,9 +12,14 @@ This is a browser extension that runs a simple JavaScript snippet on github.com 
 4. Select "Load unpacked".
 5. Choose this unzipped repo folder.
 6. Navigate to github.com.
-7. **Optional but recommended**: Set custom styles to your preference. Learn more in the [Customization note](#customization-note).
+7. **Optional but recommended**: Set custom styles to your preference. Learn
+   more in the [Customization note](#customization-note).
 
 ### Firefox
+
+** Note: Firefox cannot load this extension until support for Manifest V3 and
+background services is released. See
+https://github.com/mozilla/web-ext/issues/2379#issuecomment-1174962312 **
 
 1. Clone or download this repo. Make sure to extract any compressed files to the directory structure of this project.
 2. Navigate to `about:debugging#/runtime/this-firefox`.
