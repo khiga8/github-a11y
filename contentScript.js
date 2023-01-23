@@ -28,10 +28,11 @@ function appendAccessibilityInfo() {
 
   document.querySelectorAll(".markdown-body").forEach(function (commentBody) {
     commentBody.querySelectorAll("img").forEach(function (image) {
-      const parent = image.closest("a");
-      if (!parent || image.closest("animated-image")) return;
-
-      validateImages(parent, image);
+      const parentNodeName = image.parentElement.nodeName;
+      if (parentNodeName === "A" || parentNodeName === "P") {
+        const parent = image.closest("a") || image.closest("p");
+        validateImages(parent, image);
+      }
     });
 
     commentBody
@@ -59,7 +60,7 @@ function validateImages(parent, image) {
     parent.getAttribute("aria-label") &&
     parent.getAttribute("aria-label").trim();
 
-  if (!image.hasAttribute("alt") || (altText === "" && !parentAriaLabel)) {
+  if (!image.hasAttribute("alt") || (altText === "" && !parentAriaLabel && parent.nodeName === "A")) {
     image.classList.add("github-a11y-img-missing-alt");
   } else {
     const subtitle = createSubtitleElement();
@@ -67,8 +68,11 @@ function validateImages(parent, image) {
 
     if (parentAriaLabel) {
       subtitle.textContent = parentAriaLabel;
-    } else {
+    } else if (altText) {
       subtitle.textContent = altText;
+    } else {
+      subtitle.textContent = "hidden"
+      subtitle.classList.add("github-a11y-img-caption-empty-alt");
     }
 
     image.insertAdjacentElement("afterend", subtitle);
