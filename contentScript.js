@@ -52,6 +52,12 @@ function appendAccessibilityInfo() {
   });
 }
 
+function invalidAltText(altText) {
+  const defaultMacOsScreenshotAltRegex = /Screen ?[S|s]hot \d{4}-\d{2}-\d{2} at \d{2} \d{2} \d{2} [A|P]M/gi;
+  const imageAltRegex = /image/i;
+  return altText.match(defaultMacOsScreenshotAltRegex) || altText.match(imageAltRegex);
+}
+
 function validateImages(parent, image) {
   const altText = image.getAttribute("alt")
     ? image.getAttribute("alt").trim()
@@ -61,8 +67,9 @@ function validateImages(parent, image) {
     parent.getAttribute("aria-label").trim();
 
   if (!image.hasAttribute("alt") || (altText === "" && !parentAriaLabel && parent.nodeName === "A")) {
-    image.classList.add("github-a11y-img-missing-alt");
+    image.classList.add("github-a11y-img-invalid-alt");
   } else {
+    if (invalidAltText(altText)) parent.classList.add("github-a11y-img-invalid-alt");
     const subtitle = createSubtitleElement();
     parent.classList.add("github-a11y-img-container");
 
@@ -97,7 +104,7 @@ function validateImagesInsideAnimatedPlayer(animatedImage) {
     : "";
 
   if (!image.hasAttribute("alt") || altText === "") {
-    animatedImage.classList.add("github-a11y-img-missing-alt");
+    animatedImage.classList.add("github-a11y-img-invalid-alt");
   } else {
     const subtitle = createSubtitleElement();
     subtitle.textContent = altText;

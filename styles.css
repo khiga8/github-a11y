@@ -21,7 +21,7 @@
 }
 
 /* Styling for when image is missing alt text */
-.github-a11y-img-missing-alt {
+.github-a11y-img-invalid-alt {
   border: 5px solid var(--github-a11y-img-invalid-border-color); 
 }
 
