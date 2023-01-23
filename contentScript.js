@@ -120,7 +120,7 @@ let observer = new MutationObserver(function (mutationList) {
   timer = setTimeout(() => {
     for (const mutation of mutationList) {
       observer.disconnect();
-      if (mutation.target.closest(".markdown-body, .js-commit-preview")) {
+      if (mutation.target.closest(".markdown-body, .js-commit-preview") && !mutation.target.classList.contains("github-a11y-heading") && !mutation.target.classList.contains("github-a11y-img-container")) {
         appendAccessibilityInfo();
       }
       observe();
