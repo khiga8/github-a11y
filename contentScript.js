@@ -1,3 +1,5 @@
+import { invalidAltText } from "../utils.js";
+
 /* Default. Places heading at end of line */
 function addHeadingToBack(heading, headingPrefix) {
   headingPrefix.classList.add(
@@ -50,16 +52,6 @@ function appendAccessibilityInfo() {
         addHeadingToBack(heading, headingPrefix); // Swappable with `addHeadingToFront`
       });
   });
-}
-
-function invalidAltText(altText) {
-  const defaultMacOsScreenshotAltRegex =
-    /Screen ?[S|s]hot \d{4}-\d{2}-\d{2} at \d+ \d{2} \d{2} [A|P]M/gi;
-  const imageAltRegex = /image/i;
-  return (
-    altText.match(defaultMacOsScreenshotAltRegex) ||
-    altText.match(imageAltRegex)
-  );
 }
 
 function validateImages(parent, image) {
