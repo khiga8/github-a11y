@@ -1,4 +1,4 @@
-import { invalidAltText } from "../utils.js";
+import { invalidAltText } from "../src/utils.js";
 
 describe("invalidAltText", () => {
   test("flags default macOS screenshot", () => {

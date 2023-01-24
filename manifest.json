@@ -20,5 +20,11 @@
     "service_worker": "background.js"
   },
   "permissions": ["tabs", "webNavigation"],
-  "host_permissions": ["*://github.com/*", "https://gist.github.com/*"]
+  "host_permissions": ["*://github.com/*", "https://gist.github.com/*"],
+  "web_accessible_resources": [
+    {
+      "resources": ["src/*"],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }
