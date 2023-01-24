@@ -53,9 +53,13 @@ function appendAccessibilityInfo() {
 }
 
 function invalidAltText(altText) {
-  const defaultMacOsScreenshotAltRegex = /Screen ?[S|s]hot \d{4}-\d{2}-\d{2} at \d+ \d{2} \d{2} [A|P]M/gi;
+  const defaultMacOsScreenshotAltRegex =
+    /Screen ?[S|s]hot \d{4}-\d{2}-\d{2} at \d+ \d{2} \d{2} [A|P]M/gi;
   const imageAltRegex = /image/i;
-  return altText.match(defaultMacOsScreenshotAltRegex) || altText.match(imageAltRegex);
+  return (
+    altText.match(defaultMacOsScreenshotAltRegex) ||
+    altText.match(imageAltRegex)
+  );
 }
 
 function validateImages(parent, image) {
@@ -66,10 +70,14 @@ function validateImages(parent, image) {
     parent.getAttribute("aria-label") &&
     parent.getAttribute("aria-label").trim();
 
-  if (!image.hasAttribute("alt") || (altText === "" && !parentAriaLabel && parent.nodeName === "A")) {
+  if (
+    !image.hasAttribute("alt") ||
+    (altText === "" && !parentAriaLabel && parent.nodeName === "A")
+  ) {
     image.classList.add("github-a11y-img-invalid-alt");
   } else {
-    if (invalidAltText(altText)) parent.classList.add("github-a11y-img-invalid-alt");
+    if (invalidAltText(altText))
+      parent.classList.add("github-a11y-img-invalid-alt");
     const subtitle = createSubtitleElement();
     parent.classList.add("github-a11y-img-container");
 
@@ -78,7 +86,7 @@ function validateImages(parent, image) {
     } else if (altText) {
       subtitle.textContent = altText;
     } else {
-      subtitle.textContent = "hidden"
+      subtitle.textContent = "hidden";
       subtitle.classList.add("github-a11y-img-caption-empty-alt");
     }
 
@@ -127,7 +135,12 @@ let observer = new MutationObserver(function (mutationList) {
   timer = setTimeout(() => {
     for (const mutation of mutationList) {
       observer.disconnect();
-      if ((mutation.target.closest(".markdown-body, .js-commit-preview") || mutation.target.querySelector('.markdown-body')) && !mutation.target.classList.contains("github-a11y-heading") && !mutation.target.classList.contains("github-a11y-img-container")) {
+      if (
+        (mutation.target.closest(".markdown-body, .js-commit-preview") ||
+          mutation.target.querySelector(".markdown-body")) &&
+        !mutation.target.classList.contains("github-a11y-heading") &&
+        !mutation.target.classList.contains("github-a11y-img-container")
+      ) {
         appendAccessibilityInfo();
       }
       observe();

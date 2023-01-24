@@ -1,11 +1,11 @@
 :root {
   /* Feel free to customize colors to your preference */
-  --github-a11y-h1-color: #9B59B6;
-  --github-a11y-h2-color: #2A7AB0;
-  --github-a11y-h3-color: #9F6B3F;
-  --github-a11y-h4-color: #5A781D;
+  --github-a11y-h1-color: #9b59b6;
+  --github-a11y-h2-color: #2a7ab0;
+  --github-a11y-h3-color: #9f6b3f;
+  --github-a11y-h4-color: #5a781d;
   --github-a11y-h5-color: #d4521f;
-  --github-a11y-h6-color: #4D6066;
+  --github-a11y-h6-color: #4d6066;
   --github-a11y-heading-border: solid; /* set to none if you prefer no heading border */
   --github-a11y-img-invalid-border-color: red;
   --github-a11y-img-valid-border-color: grey;
@@ -17,21 +17,21 @@
 .github-a11y-img-container {
   display: inline-block;
   vertical-align: top;
-  border: 2px solid var(--github-a11y-img-valid-border-color); 
+  border: 2px solid var(--github-a11y-img-valid-border-color);
 }
 
 /* Styling for when image is missing alt text */
 .github-a11y-img-invalid-alt {
-  border: 5px solid var(--github-a11y-img-invalid-border-color); 
+  border: 5px solid var(--github-a11y-img-invalid-border-color);
 }
 
 /* Styling for image overlay */
 .github-a11y-img-caption {
-  display: block; 
-  background-color: var(--github-a11y-img-overlay-background-color); 
-  padding: 0.5em; 
+  display: block;
+  background-color: var(--github-a11y-img-overlay-background-color);
+  padding: 0.5em;
   color: var(--github-a11y-img-overlay-text-color);
-  z-index: 2; 
+  z-index: 2;
   width: 100%;
   opacity: 0.8;
 }
@@ -48,66 +48,72 @@
 }
 
 .markdown-body h1.github-a11y-heading {
-  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h1-color); 
+  border-bottom: 1px var(--github-a11y-heading-border)
+    var(--github-a11y-h1-color);
 }
 
-.markdown-body h1 > .github-a11y-heading-prefix, 
+.markdown-body h1 > .github-a11y-heading-prefix,
 .markdown-body h1.github-a11y-heading-prefix {
-  color: var(--github-a11y-h1-color); 
+  color: var(--github-a11y-h1-color);
 }
 
 .markdown-body h2.github-a11y-heading {
-  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h2-color); 
+  border-bottom: 1px var(--github-a11y-heading-border)
+    var(--github-a11y-h2-color);
 }
 
-.markdown-body h2 > .github-a11y-heading-prefix, 
+.markdown-body h2 > .github-a11y-heading-prefix,
 .markdown-body h2.github-a11y-heading-prefix {
-  color: var(--github-a11y-h2-color); 
+  color: var(--github-a11y-h2-color);
 }
 
 .markdown-body h3.github-a11y-heading {
-  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h3-color); 
+  border-bottom: 1px var(--github-a11y-heading-border)
+    var(--github-a11y-h3-color);
 }
 
-.markdown-body h3 > .github-a11y-heading-prefix, 
+.markdown-body h3 > .github-a11y-heading-prefix,
 .markdown-body h3.github-a11y-heading-prefix {
-  color: var(--github-a11y-h3-color); 
+  color: var(--github-a11y-h3-color);
 }
 
 .markdown-body h4.github-a11y-heading {
-  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h4-color);
+  border-bottom: 1px var(--github-a11y-heading-border)
+    var(--github-a11y-h4-color);
 }
 
-.markdown-body h4 > .github-a11y-heading-prefix, 
+.markdown-body h4 > .github-a11y-heading-prefix,
 .markdown-body h4.github-a11y-heading-prefix {
-  color: var(--github-a11y-h4-color); 
+  color: var(--github-a11y-h4-color);
 }
 
 .markdown-body h5.github-a11y-heading {
-  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h5-color);
+  border-bottom: 1px var(--github-a11y-heading-border)
+    var(--github-a11y-h5-color);
 }
 
-.markdown-body h5 > .github-a11y-heading-prefix, 
+.markdown-body h5 > .github-a11y-heading-prefix,
 .markdown-body h5.github-a11y-heading-prefix {
-  color: var(--github-a11y-h5-color); 
+  color: var(--github-a11y-h5-color);
 }
 
 .markdown-body h6.github-a11y-heading {
-  border-bottom: 1px var(--github-a11y-heading-border) var(--github-a11y-h6-color);
+  border-bottom: 1px var(--github-a11y-heading-border)
+    var(--github-a11y-h6-color);
 }
 
-.markdown-body h6 > .github-a11y-heading-prefix, 
+.markdown-body h6 > .github-a11y-heading-prefix,
 .markdown-body h6.github-a11y-heading-prefix {
-  color: var(--github-a11y-h6-color); 
-} 
+  color: var(--github-a11y-h6-color);
+}
 
 /* Used to position heading at end of line. See `contentScript.js` if you'd like heading at front */
 .github-a11y-heading-after {
-  display: table; 
+  display: table;
   width: 100%;
 }
 
 .github-a11y-heading-prefix-after {
-  display: table-cell; 
+  display: table-cell;
   text-align: right;
 }
