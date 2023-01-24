@@ -12,9 +12,9 @@ export async function initialize() {
   let timer;
   let observer = new MutationObserver(function (mutationList) {
     if (timer) clearTimeout(timer);
+    observer.disconnect();
     timer = setTimeout(() => {
       for (const mutation of mutationList) {
-        observer.disconnect();
         if (
           (mutation.target.closest(".markdown-body, .js-commit-preview") ||
             mutation.target.querySelector(".markdown-body")) &&
@@ -23,9 +23,9 @@ export async function initialize() {
         ) {
           appendAccessibilityInfo();
         }
-        observe();
       }
     }, 100);
+    observe();
   });
 
   const observe = () => {
