@@ -80,78 +80,6 @@ describe("addHeadingToBack", () => {
 });
 
 describe("validateImages", () => {
-  describe("image with non-anchor parent", () => {
-    test("flags if image has no alt text", () => {
-      document.body.innerHTML = `
-        <p id="cat">
-          <img src="some_cat.png" />
-        </p>
-      `;
-      const parent = document.querySelector("#cat");
-      const img = document.querySelector("img");
-      validateImages(parent, img);
-      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(true);
-    });
-
-    test("flags if image has no alt text even if parent has aria-label", () => {
-      document.body.innerHTML = `
-        <p aria-label="something" id="cat">
-          <img src="some_cat.png" />
-        </p>
-      `;
-      const parent = document.querySelector("#cat");
-      const img = document.querySelector("img");
-      validateImages(parent, img);
-      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(true);
-    });
-
-    test("does not flag if image has empty alt", () => {
-      document.body.innerHTML = `
-        <p id="cat">
-          <img alt="" src="some_cat.png" />
-        </p>
-      `;
-      const parent = document.querySelector("#cat");
-      const img = document.querySelector("img");
-      validateImages(parent, img);
-      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(false);
-    });
-
-    test("surfaces alt if image has alt", () => {
-      document.body.innerHTML = `
-        <p id="cat">
-          <img alt="Cute cat" src="some_cat.png" />
-        </p>
-      `;
-      const parent = document.querySelector("#cat");
-      const img = document.querySelector("img");
-      validateImages(parent, img);
-      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(false);
-      expect(document.body.innerHTML).toBe(`
-        <p id="cat" class="github-a11y-img-container">
-          <img alt="Cute cat" src="some_cat.png"><span aria-hidden="true" class="github-a11y-img-caption github-a11y-img-caption-with-alt">Cute cat</span>
-        </p>
-      `);
-    });
-
-    test("surfaces if alt is explicitly hidden", () => {
-      document.body.innerHTML = `
-        <p id="cat">
-          <img alt="" src="some_cat.png" />
-        </p>
-      `;
-      const parent = document.querySelector("#cat");
-      const img = document.querySelector("img");
-      validateImages(parent, img);
-      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(false);
-      expect(document.body.innerHTML).toBe(`
-        <p id="cat" class="github-a11y-img-container">
-          <img alt="" src="some_cat.png"><span aria-hidden="true" class="github-a11y-img-caption github-a11y-img-caption-with-alt github-a11y-img-caption-empty-alt">hidden</span>
-        </p>
-      `);
-    });
-  });
-
   describe("image with anchor parent", () => {
     test("adds invalid class if image has no alt attribute", () => {
       document.body.innerHTML = `
@@ -214,7 +142,7 @@ describe("validateImages", () => {
       const parent = document.querySelector("#cat");
       const img = document.querySelector("img");
       validateImages(parent, img);
-      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(false);
+      expect(document.querySelector(".github-a11y-img-invalid-alt")).toBe(null);
     });
 
     test("surfaces alt text as captions ", () => {
@@ -226,7 +154,79 @@ describe("validateImages", () => {
       const parent = document.querySelector("#cat");
       const img = document.querySelector("img");
       validateImages(parent, img);
-      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(false);
+      expect(document.querySelector(".github-a11y-img-invalid-alt")).toBe(null);
+    });
+  });
+
+  describe("image with non-anchor parent", () => {
+    test("flags if image has no alt text", () => {
+      document.body.innerHTML = `
+        <p id="cat">
+          <img src="some_cat.png" />
+        </p>
+      `;
+      const parent = document.querySelector("#cat");
+      const img = document.querySelector("img");
+      validateImages(parent, img);
+      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(true);
+    });
+
+    test("flags if image has no alt text even if parent has aria-label", () => {
+      document.body.innerHTML = `
+        <p aria-label="something" id="cat">
+          <img src="some_cat.png" />
+        </p>
+      `;
+      const parent = document.querySelector("#cat");
+      const img = document.querySelector("img");
+      validateImages(parent, img);
+      expect(img.classList.contains("github-a11y-img-invalid-alt")).toBe(true);
+    });
+
+    test("does not flag if image has empty alt", () => {
+      document.body.innerHTML = `
+        <p id="cat">
+          <img alt="" src="some_cat.png" />
+        </p>
+      `;
+      const parent = document.querySelector("#cat");
+      const img = document.querySelector("img");
+      validateImages(parent, img);
+      expect(document.querySelector(".github-a11y-img-invalid-alt")).toBe(null);
+    });
+
+    test("surfaces alt if image has alt", () => {
+      document.body.innerHTML = `
+        <p id="cat">
+          <img alt="Cute cat" src="some_cat.png" />
+        </p>
+      `;
+      const parent = document.querySelector("#cat");
+      const img = document.querySelector("img");
+      validateImages(parent, img);
+      expect(document.querySelector(".github-a11y-img-invalid-alt")).toBe(null);
+      expect(document.body.innerHTML).toBe(`
+        <p id="cat" class="github-a11y-img-container">
+          <img alt="Cute cat" src="some_cat.png"><span aria-hidden="true" class="github-a11y-img-caption github-a11y-img-caption-with-alt">Cute cat</span>
+        </p>
+      `);
+    });
+
+    test("surfaces if alt is explicitly hidden", () => {
+      document.body.innerHTML = `
+        <p id="cat">
+          <img alt="" src="some_cat.png" />
+        </p>
+      `;
+      const parent = document.querySelector("#cat");
+      const img = document.querySelector("img");
+      validateImages(parent, img);
+      expect(document.querySelector(".github-a11y-img-invalid-alt")).toBe(null);
+      expect(document.body.innerHTML).toBe(`
+        <p id="cat" class="github-a11y-img-container">
+          <img alt="" src="some_cat.png"><span aria-hidden="true" class="github-a11y-img-caption github-a11y-img-caption-with-alt github-a11y-img-caption-empty-alt">hidden</span>
+        </p>
+      `);
     });
   });
 });
