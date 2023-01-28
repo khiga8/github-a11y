@@ -1,4 +1,8 @@
-import { invalidAltText, removeOutdatedElements } from "../src/utils.js";
+import {
+  addHeadingToBack,
+  invalidAltText,
+  removeOutdatedElements,
+} from "../src/utils.js";
 
 describe("invalidAltText", () => {
   test("flags default macOS screenshot", () => {
@@ -30,7 +34,7 @@ describe("invalidAltText", () => {
 });
 
 describe("removeOutdatedElements", () => {
-  test("", () => {
+  test("ensure that elements with '.github-a11y-img-container' or 'github-a11y-img-caption' are removed", () => {
     document.body.innerHTML = `
       <div class="outdated">
         <h1>Heading 1 <span aria-hidden="true" class="github-a11y-heading-prefix">h1</span></h1>
@@ -44,6 +48,32 @@ describe("removeOutdatedElements", () => {
         </div>
       </div>
     `;
+    expect(
+      document.querySelectorAll(
+        ".github-a11y-heading-prefix, .github-a11y-img-caption"
+      ).length
+    ).toBe(3);
     removeOutdatedElements();
+    expect(
+      document.querySelectorAll(
+        ".github-a11y-heading-prefix, .github-a11y-img-caption"
+      ).length
+    ).toBe(0);
+  });
+});
+
+describe("addHeadingToBack", () => {
+  test("ensure heading prefix is placed at end of heading", () => {
+    document.body.innerHTML = `
+      <h1 id="dog-facts">Dog facts</h1>
+    `;
+    const headingPrefix = document.createElement("span");
+    headingPrefix.setAttribute("aria-hidden", "true");
+    addHeadingToBack(document.querySelector("#dog-facts"), headingPrefix);
+
+    const heading = document.querySelector("#dog-facts");
+    expect(heading.innerHTML).toBe(
+      'Dog facts<span aria-hidden="true" class="github-a11y-heading-prefix github-a11y-heading-prefix-after"> h1</span>'
+    );
   });
 });

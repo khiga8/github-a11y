@@ -48,7 +48,7 @@ export function appendAccessibilityInfo() {
 }
 
 /* Default. Places heading at end of line */
-function addHeadingToBack(heading, headingPrefix) {
+export function addHeadingToBack(heading, headingPrefix) {
   headingPrefix.classList.add(
     "github-a11y-heading-prefix",
     "github-a11y-heading-prefix-after"
