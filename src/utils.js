@@ -8,33 +8,18 @@ export function invalidAltText(altText) {
   );
 }
 
-/* Default. Places heading at end of line */
-function addHeadingToBack(heading, headingPrefix) {
-  headingPrefix.classList.add(
-    "github-a11y-heading-prefix",
-    "github-a11y-heading-prefix-after"
-  );
-  headingPrefix.textContent = ` ${heading.tagName.toLowerCase()}`;
-  heading.classList.add("github-a11y-heading", "github-a11y-heading-after");
-  heading.append(headingPrefix);
-}
-
-/* Places heading in front of line */
-function addHeadingToFront(heading, headingPrefix) {
-  headingPrefix.textContent = `${heading.tagName.toLowerCase()} `;
-  headingPrefix.classList.add("github-a11y-heading-prefix");
-  heading.classList.add("github-a11y-heading");
-  heading.insertBefore(headingPrefix, heading.firstChild);
-}
-
-/* Append accessibility info to DOM */
-export function appendAccessibilityInfo() {
+export function removeOutdatedElements() {
   const outdatedElements = document.querySelectorAll(
     ".github-a11y-heading-prefix, .github-a11y-img-caption"
   );
   for (const element of outdatedElements) {
     element.remove();
   }
+}
+
+/* Append accessibility info to DOM */
+export function appendAccessibilityInfo() {
+  removeOutdatedElements();
 
   document.querySelectorAll(".markdown-body").forEach(function (commentBody) {
     commentBody.querySelectorAll("img").forEach(function (image) {
@@ -61,6 +46,26 @@ export function appendAccessibilityInfo() {
       });
   });
 }
+
+/* Default. Places heading at end of line */
+function addHeadingToBack(heading, headingPrefix) {
+  headingPrefix.classList.add(
+    "github-a11y-heading-prefix",
+    "github-a11y-heading-prefix-after"
+  );
+  headingPrefix.textContent = ` ${heading.tagName.toLowerCase()}`;
+  heading.classList.add("github-a11y-heading", "github-a11y-heading-after");
+  heading.append(headingPrefix);
+}
+
+/* Places heading in front of line */
+function addHeadingToFront(heading, headingPrefix) {
+  headingPrefix.textContent = `${heading.tagName.toLowerCase()} `;
+  headingPrefix.classList.add("github-a11y-heading-prefix");
+  heading.classList.add("github-a11y-heading");
+  heading.insertBefore(headingPrefix, heading.firstChild);
+}
+
 function validateImages(parent, image) {
   const altText = image.getAttribute("alt")
     ? image.getAttribute("alt").trim()

@@ -1,4 +1,4 @@
-import { invalidAltText } from "../src/utils.js";
+import { invalidAltText, removeOutdatedElements } from "../src/utils.js";
 
 describe("invalidAltText", () => {
   test("flags default macOS screenshot", () => {
@@ -26,5 +26,24 @@ describe("invalidAltText", () => {
     expect(
       invalidAltText("A large image of a dog is projected on the wall")
     ).toBe(false);
+  });
+});
+
+describe("removeOutdatedElements", () => {
+  test("", () => {
+    document.body.innerHTML = `
+      <div class="outdated">
+        <h1>Heading 1 <span aria-hidden="true" class="github-a11y-heading-prefix">h1</span></h1>
+        <div class="github-a11y-img-container">
+          <img alt="Cute dog" />
+          <span class="github-a11y-img-caption">Cute dog</span>
+        </div>
+        <div class="github-a11y-img-container">
+          <img alt="Cute cat" />
+          <span class="github-a11y-img-caption">Cute cat</span>
+        </div>
+      </div>
+    `;
+    removeOutdatedElements();
   });
 });
