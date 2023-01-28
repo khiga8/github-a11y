@@ -34,11 +34,13 @@ This extension will only run on GitHub domain and does the following on all mark
 
 - Creates a text overlay over all images with the alt text. This includes Pull Requests, Issues, Repo READMEs, and Discussions.
   - If an image is missing an alt text, it will appear with a red border.
-  - **If an image has an empty string alt like `""`, it will also appear with a red border**. Typically, an empty string alt indicates that an image is decorative and should be hidden. However, on GitHub, all markdown images are rendered within a link element. Therefore, we recommend that all images in GitHub markdown have an alt text provided or the link will be announced without a bane,
+  - If an image has alt text but is non-descriptive like `image` or the default macOS screenshot name, it will appear with a red border.
+  - **If an image has an empty string alt like `""`, it will also appear with a red border**.
+    Typically, an empty string alt indicates that an image is decorative and should be hidden. However, on GitHub, all markdown images are rendered within a link element. Therefore, we recommend that all images in GitHub markdown have an alt text provided, or else link will be announced without a name,
 
 <img width="600" alt="Example screenshots of two images that have been posted on a GitHub issue, each appearing with alt text overlay. The first has unhelpful alt text based on the filename, `Screen Shot 2022-02-10` while the second image has a more intentional alt text, `Screenshot of example select menu...`." src="https://user-images.githubusercontent.com/16447748/154407948-1d02f35f-52ce-49ed-b098-e3528018230b.png">
 
-- Appends the heading level that is used after the heading text within markdown bodies. Heading levels are useful for conveying semantics for screenreader, and other assistive technology users. This similarly aims to bring mindfulness particularly for sighted users who may pay less attention to heading level semantics.
+- Appends the heading level that is used after the heading text within markdown bodies. Heading levels are useful for conveying semantics for screen reader, and other assistive technology users, but they are not currently surfaced on GitHub. This extension makes the heading level more visually apparent.
 
 <img width="600" alt="Example screenshots of heading levels appended at end of heading text line inside a GitHub markdown, each represented by a different color" src="https://user-images.githubusercontent.com/16447748/154763325-57ad4785-691c-4760-b0ca-b2e3cabacd1f.png">
 
