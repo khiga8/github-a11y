@@ -6,12 +6,12 @@
   "version": "0.6",
   "content_scripts": [
     {
-      "matches": ["https://*.*.github.com/*", "https://github.com/*", "https://gist.github.com/*"],
+      "matches": ["https://*.github.com/*", "https://github.com/*"],
       "css": ["styles.css"],
       "js": ["contentScript.js"]
     },
     {
-      "matches": ["https://*.*.github.com/*", "https://github.com/*", "https://gist.github.com/*"],
+      "matches": ["https://*.github.com/*", "https://github.com/*"],
       "css": ["./devtools-feedback/contentScriptStyles.css"],
       "js": ["./devtools-feedback/contentScript.js"]
     }
@@ -20,7 +20,7 @@
     "service_worker": "background.js"
   },
   "permissions": ["tabs", "webNavigation"],
-  "host_permissions": ["*://*.*.github.com/*", "*://github.com/*", "https://gist.github.com/*"],
+  "host_permissions": ["*://*.github.com/*", "*://github.com/*"],
   "web_accessible_resources": [
     {
       "resources": ["src/*"],
