@@ -113,6 +113,11 @@ function validateImagesWithAnchorParent(parent, image) {
 }
 
 function validateImagesWithNonAnchorParent(parent, image) {
+  const isEmoji = image.classList.contains("emoji");
+  if (isEmoji) {
+    return;
+  }
+
   const hasAltTextAttribute = image.hasAttribute("alt");
   const altText = hasAltTextAttribute && image.getAttribute("alt").trim();
   if (!hasAltTextAttribute) {

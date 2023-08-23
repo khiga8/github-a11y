@@ -195,6 +195,22 @@ describe("validateImages", () => {
       expect(document.querySelector(".github-a11y-img-invalid-alt")).toBe(null);
     });
 
+    test("does not flag if image is an emoji", () => {
+      console.log("am i run");
+      document.body.innerHTML = `
+        <p id="cat">
+          <img class="emoji" alt="Some cat." src="some_cat.png" />
+        </p>
+      `;
+      const parent = document.querySelector("#cat");
+      const img = document.querySelector("img");
+      validateImages(parent, img);
+      const captionContainer = document.querySelector(
+        ".github-a11y-img-container"
+      );
+      expect(captionContainer).toBe(null);
+    });
+
     test("surfaces alt if image has alt", () => {
       document.body.innerHTML = `
         <p id="cat">
