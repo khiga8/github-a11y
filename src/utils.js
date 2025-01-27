@@ -23,7 +23,11 @@ export function appendAccessibilityInfo() {
 
   document.querySelectorAll(".markdown-body").forEach(function (commentBody) {
     commentBody.querySelectorAll("img").forEach(function (image) {
-      validateImages(image.closest("a") || image.closest("p"), image);
+      const parentNodeName = image.parentElement.nodeName;
+      if (parentNodeName === "A" || parentNodeName === "P") {
+        const parent = image.closest("a") || image.closest("p");
+        validateImages(parent, image);
+      }
     });
 
     commentBody
