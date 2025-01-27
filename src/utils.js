@@ -101,6 +101,9 @@ function validateImagesWithAnchorParent(parent, image) {
     image.classList.add("github-a11y-img-invalid-alt");
   }
 
+  if (parent.querySelector('.github-a11y-img-caption')) {
+    return;
+  }
   const subtitle = createSubtitleElement();
   parent.classList.add("github-a11y-img-container");
 
@@ -122,6 +125,9 @@ function validateImagesWithNonAnchorParent(parent, image) {
   }
   if (invalidAltText(altText)) {
     image.classList.add("github-a11y-img-invalid-alt");
+  }
+  if (parent.querySelector('.github-a11y-img-caption')) {
+    return;
   }
   const subtitle = createSubtitleElement();
   parent.classList.add("github-a11y-img-container");
