@@ -4,7 +4,6 @@ export async function initialize() {
   /* Listen for messages from the background script */
   chrome.runtime.onMessage.addListener((message, sendResponse) => {
     if (message.type === "navigation") {
-      sendResponse({ status: "ok" });
       appendAccessibilityInfo();
     }
   });

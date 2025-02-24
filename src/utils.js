@@ -28,7 +28,9 @@ export function appendAccessibilityInfo() {
       ".github-a11y-heading-prefix, .github-a11y-img-caption"
     ).length > 0) return
 
-    commentBody.querySelectorAll("img").forEach(function (image) {
+    [...commentBody.querySelectorAll("img")]
+      .filter(el => !el.closest('animated-image'))
+      .forEach(function (image) {
       const parentNodeName = image.parentElement.nodeName;
       if (parentNodeName === "A" || parentNodeName === "P") {
         const parent = image.closest("a") || image.closest("p");
