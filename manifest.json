@@ -3,7 +3,7 @@
   "name": "github-a11y",
   "description": "This extension helps increase accessibility mindfulness while using GitHub",
   "devtools_page": "./devtools-feedback/devtools.html",
-  "version": "0.6",
+  "version": "0.7",
   "content_scripts": [
     {
       "matches": ["https://*.github.com/*", "https://github.com/*"],
