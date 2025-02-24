@@ -22,6 +22,12 @@ export function appendAccessibilityInfo() {
   removeOutdatedElements();
 
   document.querySelectorAll(".markdown-body").forEach(function (commentBody) {
+    // On GitHub Issues, .markdown-body is set twice on the same markdownbody. div.markdown-body > div.markdown-body
+    // To avoid setting annotation twice, early return.
+    if (commentBody.querySelectorAll(
+      ".github-a11y-heading-prefix, .github-a11y-img-caption"
+    ).length > 0) return
+
     commentBody.querySelectorAll("img").forEach(function (image) {
       const parentNodeName = image.parentElement.nodeName;
       if (parentNodeName === "A" || parentNodeName === "P") {
