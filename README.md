@@ -17,10 +17,6 @@ This is a browser extension that runs a simple JavaScript snippet on github.com 
 
 ### Firefox
 
-** Note: Firefox cannot load this extension until support for Manifest V3 and
-background services is released. See
-https://github.com/mozilla/web-ext/issues/2379#issuecomment-1174962312 **
-
 1. Clone or download this repo. Make sure to extract any compressed files to the directory structure of this project.
 2. Navigate to `about:debugging#/runtime/this-firefox`.
 3. Select `Load Temporary Add-on...`.
