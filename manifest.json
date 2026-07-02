@@ -17,7 +17,8 @@
     }
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "scripts": ["background.js"]
   },
   "permissions": ["tabs", "webNavigation"],
   "host_permissions": ["*://*.github.com/*", "*://github.com/*"],
